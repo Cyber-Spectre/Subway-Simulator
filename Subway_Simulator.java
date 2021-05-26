@@ -17,17 +17,61 @@ public class Subway_Simulator {
         Scanner scan1 = new Scanner(System.in);
         Random rand = new Random();
         
-        //Resources
-        int bread = rand.nextInt(50);
-        int meat = rand.nextInt(50);
-        int cheese = rand.nextInt(50);
-        int veg = rand.nextInt(50);
-        int sauce = rand.nextInt(50);
-        int drink = rand.nextInt(50);
-        int supp = rand.nextInt(50);
+        //Variables
+        /*
+        Resources
+        Each resource starts with a random amount between 0 and 75
+        */
+        int bread = rand.nextInt(75);
+        int meat = rand.nextInt(75);
+        int cheese = rand.nextInt(75);
+        int veg = rand.nextInt(75);
+        int sauce = rand.nextInt(75);
+        int drink = rand.nextInt(75);
+        int supp = rand.nextInt(75);
         
-        System.out.println(bread + " " + meat + " " + cheese + " " + veg + " " + sauce + " " + drink + " " + supp);
+        /*
+        Currency
+        starts at random number between $400 and $1000
+        */
+        double money = 400.00 + rand.nextInt(600);
         
+        /*
+        Resource prices
+        (per 25 units)
+        */
+        double bread$cost = 6.00;
+        double meat$cost = 10.00;
+        double cheese$cost = 8.00;
+        double veg$cost = 4.00;
+        double sauce$cost = 2.00;
+        double drink$cost = 1.00;
+        double supp$cost = 3.00;
+        
+        /*
+        Sell prices
+        every resource adds onto total
+        (per 1 unit)
+        */
+        double bread$sell = 0.35;
+        double meat$sell = 0.60;
+        double cheese$sell = 0.40;
+        double veg$sell = 0.20;
+        double sauce$sell = 0.15;
+        double drink$sell = 0.08;
+        double supp$sell = 0.18;
+        
+        //Misc variables
+        int menuChoice, quantity;
+        boolean playAgain = true;
+        // /Variables
+        
+        //Game code
+        do{
+            
+            
+            
+        }
     }
     
 }
