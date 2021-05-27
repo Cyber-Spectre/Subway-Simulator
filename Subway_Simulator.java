@@ -69,9 +69,32 @@ public class Subway_Simulator {
         //Game code
         do{
             
+            //Start
+            System.out.println("Welcome to Subway Simulator!\n"
+                + "==============================\n"
+                + "Your manager is sick and will need 2 weeks to recover, he made you the substitute manager while he is gone, maybe if you do good enough, you'll get a promotion! \n"
+                + "\n"
+                + "==============================\n"
+                + "You are starting with the following:\n"
+                + bread + " bread\n"
+                + meat + " meat\n"
+                + cheese + " cheese\n"
+                + veg + " vegetables\n"
+                + sauce + " sauce\n"
+                + drink + " drinks\n"
+                + supp + " supplies\n"
+                + "and $" + money + "\n"
+                + "==============================\n"
+                        + "What would you like to do? (Make sure you buy enough resources)\n"
+                        + "(0) Open the restaurant\n"
+                        + "(1) Order more resources\n"
+                        + "(2) Exit the game");
+           
             
             
         }
+        while (playAgain);
+        
     }
     
 }
