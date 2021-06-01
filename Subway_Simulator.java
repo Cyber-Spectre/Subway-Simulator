@@ -112,9 +112,10 @@ public class Subway_Simulator {
                 + "What would you like to do?\n"
                 + "(0) Open the restaurant\n"
                 + "(1) Order more resources\n"
-                + "(2) Check game stats\n"
-                + "(3) Exit the game\n"
-                + "==============================");
+                + "(2) Buy upgrades\n"
+                + "(3) Check game stats\n"
+                + "(4) Exit the game\n"
+                + "==============================\n");
             
             menuChoice = scan1.nextInt();
             
@@ -143,192 +144,297 @@ public class Subway_Simulator {
                             + "(7)Supplies: $" + supp$cost + "\n"
                             + "==============================\n");
                         storeChoice = scan1.nextInt();
-                        switch (storeChoice){
+                        switch (storeChoice){ //time for very messy code
                             
-                            case 0:
+                            case 0: //exit
                                 System.out.println("Thank you for shopping with us!");
                                 leaveStore = true;
                                 break;
                                 
-                            case 1:
+                            case 1: //bread
                                 System.out.println("==============================\n"
                                     + "Cost per package: $" + bread$cost + "\n"
                                     + "You have $" + money + "\n"
+                                    + "You currently have " + bread + " units\n"        
                                     + "How many packages would you like to buy?");
                                 quantity = scan1.nextInt();
                                 if (quantity * bread$cost > money) {
-                                    System.out.println("Insufficient funds.");
+                                    System.out.println("Insufficient funds\n"
+                                    + "==============================\n"
+                                    + "");
                                 }
                                 else {
                                     money = money - (quantity * bread$cost);
                                     bread = bread + (quantity * 25);
+                                    totalSpent = totalSpent + (quantity * bread$cost);
+                                    totalResourcesBought = totalResourcesBought + (quantity * 25);
                                 }
-                                if (biggerStorage = false && bread > 150) {
-                                    System.out.println("You do not have enough storage for that");
+                                if (!biggerStorage && bread > 150) {
+                                System.out.println("You do not have enough storage for that\n"
+                                + "==============================\n"
+                                + "");
                                     money = money + (quantity * bread$cost);
                                     bread = bread - (quantity * 25);
+                                    totalSpent = totalSpent - (quantity * bread$cost);
+                                    totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
-                                else if (biggerStorage = true && bread > 300) {
-                                System.out.println("You do not have enough storage for that");
+                                else if (biggerStorage && bread > 300) {
+                                System.out.println("You do not have enough storage for that\n"
+                                + "==============================\n"
+                                + "");
                                 money = money + (quantity * bread$cost);
                                 bread = bread - (quantity * 25);
+                                totalSpent = totalSpent - (quantity * bread$cost);
+                                totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
                                 break;
                                 
-                            case 2:
+                            case 2: //meat
                                 System.out.println("==============================\n"
                                     + "Cost per package: $" + meat$cost + "\n"
                                     + "You have $" + money + "\n"
+                                    + "You currently have " + meat + " units\n"        
                                     + "How many packages would you like to buy?");
                                 quantity = scan1.nextInt();
                                 if (quantity * meat$cost > money) {
-                                    System.out.println("Insufficient funds.");
+                                    System.out.println("Insufficient funds\n"
+                                    + "==============================\n"
+                                    + "");
                                 }
                                 else {
                                     money = money - (quantity * meat$cost);
                                     meat = meat + (quantity * 25);
+                                    totalSpent = totalSpent + (quantity * meat$cost);
+                                    totalResourcesBought = totalResourcesBought + (quantity * 25);
                                 }
-                                if (biggerStorage = false && meat > 150) {
-                                    System.out.println("You do not have enough storage for that");
+                                if (!biggerStorage && meat > 150) {
+                                System.out.println("You do not have enough storage for that\n"
+                                + "==============================\n"
+                                + "");
                                     money = money + (quantity * meat$cost);
                                     meat = meat - (quantity * 25);
+                                    totalSpent = totalSpent - (quantity * meat$cost);
+                                    totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
-                                else if (biggerStorage = true && meat > 300) {
-                                System.out.println("You do not have enough storage for that");
+                                else if (biggerStorage && meat > 300) {
+                                System.out.println("You do not have enough storage for that\n"
+                                + "==============================\n"
+                                + "");
                                 money = money + (quantity * meat$cost);
                                 meat = meat - (quantity * 25);
+                                totalSpent = totalSpent - (quantity * meat$cost);
+                                totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
                                 break;
                             
-                            case 3:
+                            case 3: //cheese
                                 System.out.println("==============================\n"
                                     + "Cost per package: $" + cheese$cost + "\n"
                                     + "You have $" + money + "\n"
+                                    + "You currently have " + cheese + " units\n"        
                                     + "How many packages would you like to buy?");
                                 quantity = scan1.nextInt();
                                 if (quantity * cheese$cost > money) {
-                                    System.out.println("Insufficient funds.");
+                                    System.out.println("Insufficient funds\n"
+                                    + "==============================\n"
+                                    + "");
                                 }
                                 else {
                                     money = money - (quantity * cheese$cost);
                                     cheese = cheese + (quantity * 25);
+                                    totalSpent = totalSpent + (quantity * cheese$cost);
+                                    totalResourcesBought = totalResourcesBought + (quantity * 25);
                                 }
-                                if (biggerStorage = false && cheese > 150) {
-                                    System.out.println("You do not have enough storage for that");
+                                if (!biggerStorage && cheese > 150) {
+                                System.out.println("You do not have enough storage for that\n"
+                                + "==============================\n"
+                                + "");
                                     money = money + (quantity * cheese$cost);
                                     cheese = cheese - (quantity * 25);
+                                    totalSpent = totalSpent - (quantity * cheese$cost);
+                                    totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
-                                else if (biggerStorage = true && cheese > 300) {
-                                System.out.println("You do not have enough storage for that");
+                                else if (biggerStorage && cheese > 300) {
+                                System.out.println("You do not have enough storage for that\n"
+                                + "==============================\n"
+                                + "");
                                 money = money + (quantity * cheese$cost);
                                 cheese = cheese - (quantity * 25);
+                                totalSpent = totalSpent - (quantity * cheese$cost);
+                                totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
                                 break;
                                 
-                            case 4:
+                            case 4: //vegetables
                                 System.out.println("==============================\n"
                                     + "Cost per package: $" + veg$cost + "\n"
                                     + "You have $" + money + "\n"
+                                    + "You currently have " + veg + " units\n"
                                     + "How many packages would you like to buy?");
                                 quantity = scan1.nextInt();
                                 if (quantity * veg$cost > money) {
-                                    System.out.println("Insufficient funds.");
+                                    System.out.println("Insufficient funds\n"
+                                    + "==============================\n"
+                                    + "");
                                 }
                                 else {
                                     money = money - (quantity * veg$cost);
                                     veg = veg + (quantity * 25);
+                                    totalSpent = totalSpent + (quantity * veg$cost);
+                                    totalResourcesBought = totalResourcesBought + (quantity * 25);
                                 }
-                                if (biggerStorage = false && veg > 150) {
-                                    System.out.println("You do not have enough storage for that");
+                                if (!biggerStorage && veg > 150) {
+                                System.out.println("You do not have enough storage for that\n"
+                                + "==============================\n"
+                                + "");
                                     money = money + (quantity * veg$cost);
                                     veg = veg - (quantity * 25);
+                                    totalSpent = totalSpent - (quantity * veg$cost);
+                                    totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
-                                else if (biggerStorage = true && veg > 300) {
-                                System.out.println("You do not have enough storage for that");
+                                else if (biggerStorage && veg > 300) {
+                                System.out.println("You do not have enough storage for that\n"
+                                + "==============================\n"
+                                + "");
                                 money = money + (quantity * veg$cost);
                                 veg = veg - (quantity * 25);
+                                totalSpent = totalSpent - (quantity * veg$cost);
+                                totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
                                 break;
                                 
-                            case 5:
+                            case 5: //sauce
                                 System.out.println("==============================\n"
                                     + "Cost per package: $" + sauce$cost + "\n"
                                     + "You have $" + money + "\n"
+                                    + "You currently have " + sauce + " units\n"
                                     + "How many packages would you like to buy?");
                                 quantity = scan1.nextInt();
                                 if (quantity * sauce$cost > money) {
-                                    System.out.println("Insufficient funds.");
+                                    System.out.println("Insufficient funds\n"
+                                    + "==============================\n"
+                                    + "");
                                 }
                                 else {
                                     money = money - (quantity * sauce$cost);
                                     sauce = sauce + (quantity * 25);
+                                    totalSpent = totalSpent + (quantity * sauce$cost);
+                                    totalResourcesBought = totalResourcesBought + (quantity * 25);
                                 }
-                                if (biggerStorage = false && sauce > 150) {
-                                    System.out.println("You do not have enough storage for that");
+                                if (!biggerStorage && sauce > 150) {
+                                System.out.println("You do not have enough storage for that\n"
+                                + "==============================\n"
+                                + "");
                                     money = money + (quantity * sauce$cost);
                                     sauce = sauce - (quantity * 25);
+                                    totalSpent = totalSpent - (quantity * sauce$cost);
+                                    totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
-                                else if (biggerStorage = true && sauce > 300) {
-                                System.out.println("You do not have enough storage for that");
+                                else if (biggerStorage && sauce > 300) {
+                                System.out.println("You do not have enough storage for that\n"
+                                + "==============================\n"
+                                + "");
                                 money = money + (quantity * sauce$cost);
                                 sauce = sauce - (quantity * 25);
+                                totalSpent = totalSpent - (quantity * sauce$cost);
+                                totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
                                 break;
                                 
-                            case 6:
+                            case 6: //drinks
                                 System.out.println("==============================\n"
                                     + "Cost per package: $" + drink$cost + "\n"
                                     + "You have $" + money + "\n"
+                                    + "You currently have " + drink + " units\n"
                                     + "How many packages would you like to buy?");
                                 quantity = scan1.nextInt();
                                 if (quantity * drink$cost > money) {
-                                    System.out.println("Insufficient funds.");
+                                    System.out.println("Insufficient funds\n"
+                                    + "==============================\n"
+                                    + "");
                                 }
                                 else {
                                     money = money - (quantity * drink$cost);
                                     drink = drink + (quantity * 25);
+                                    totalSpent = totalSpent + (quantity * drink$cost);
+                                    totalResourcesBought = totalResourcesBought + (quantity * 25);
                                 }
-                                if (biggerStorage = false && drink > 150) {
-                                    System.out.println("You do not have enough storage for that");
+                                if (!biggerStorage && drink > 150) {
+                                System.out.println("You do not have enough storage for that\n"
+                                + "==============================\n"
+                                + "");
                                     money = money + (quantity * drink$cost);
                                     drink = drink - (quantity * 25);
+                                    totalSpent = totalSpent - (quantity * drink$cost);
+                                    totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
-                                else if (biggerStorage = true && drink > 300) {
-                                System.out.println("You do not have enough storage for that");
+                                else if (biggerStorage && drink > 300) {
+                                System.out.println("You do not have enough storage for that\n"
+                                + "==============================\n"
+                                + "");
                                 money = money + (quantity * drink$cost);
                                 drink = drink - (quantity * 25);
+                                totalSpent = totalSpent - (quantity * drink$cost);
+                                totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
                                 break;
                                 
-                            case 7:
+                            case 7: //supplies
                                 System.out.println("==============================\n"
                                     + "Cost per package: $" + supp$cost + "\n"
                                     + "You have $" + money + "\n"
+                                    + "You currently have " + supp + " units\n"
                                     + "How many packages would you like to buy?");
                                 quantity = scan1.nextInt();
                                 if (quantity * supp$cost > money) {
-                                    System.out.println("Insufficient funds.");
+                                    System.out.println("Insufficient funds\n"
+                                    + "==============================\n"
+                                    + "");
                                 }
                                 else {
                                     money = money - (quantity * supp$cost);
                                     supp = supp + (quantity * 25);
+                                    totalSpent = totalSpent + (quantity * supp$cost);
+                                    totalResourcesBought = totalResourcesBought + (quantity * 25);
                                 }
-                                if (biggerStorage = false && supp > 150) {
-                                    System.out.println("You do not have enough storage for that");
+                                if (!biggerStorage && supp > 150) {
+                                System.out.println("You do not have enough storage for that\n"
+                                + "==============================\n"
+                                + "");
                                     money = money + (quantity * supp$cost);
                                     supp = supp - (quantity * 25);
+                                    totalSpent = totalSpent - (quantity * supp$cost);
+                                    totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
-                                else if (biggerStorage = true && supp > 300) {
-                                System.out.println("You do not have enough storage for that");
+                                else if (biggerStorage && supp > 300) {
+                                System.out.println("You do not have enough storage for that\n"
+                                + "==============================\n"
+                                + "");
                                 money = money + (quantity * supp$cost);
                                 supp = supp - (quantity * 25);
+                                totalSpent = totalSpent - (quantity * supp$cost);
+                                totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
                                 break;
                         }
                     }
                     break;
                     
-                case 2: //Game stats
+                case 2: //upgrades
+                    System.out.println("==============================\n"
+                        + "Welcome to the upgrade shop\n"
+                        + "You currently have $" + money + "\n"
+                        + "What would you like to buy?\n"
+                        + "==============================");
+                    if (!biggerStorage) {
+                        System.out.println("(0) Bigger storage ($200)");
+                    }
+                    else {
+                        System.out.println("(0) Bigger storage (BOUGHT)");
+                    }
+                    break;
+                    
+                case 3: //Game stats
                     System.out.println("Welcome to the stats menu!\n"
                         + "==============================\n"
                         + "You have spent: $" + totalSpent + "\n"
@@ -345,7 +451,7 @@ public class Subway_Simulator {
                         + "");
                     break;
                     
-                case 3: //Exit game
+                case 4: //Exit game
                     System.out.println("Thank you for playing, goodbye!");
                     playAgain = false;
                     break;
