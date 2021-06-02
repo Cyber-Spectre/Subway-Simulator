@@ -68,9 +68,17 @@ public class Subway_Simulator {
         //Misc variables
         int menuChoice, quantity;
         boolean playAgain = true;
+        int customers = 0;
+        int serveLimit = 0;
+        int serveAmount = 0;
+        int suppUsed = 0;
         
         //Extra variables
         boolean biggerStorage = false;
+        boolean orderTerminal = false;
+        int supplier = 0;
+        boolean deliveryDeal = false;
+        boolean neonSign = false;
         
         //Stat variables
         double totalSpent = 0.00;
@@ -122,7 +130,71 @@ public class Subway_Simulator {
             switch (menuChoice) {
                 
                 case 0: //Open restaurant
-                    
+                    customers = 0;
+                    serveLimit = 0;
+                    serveAmount = 0;
+                    if (neonSign) {
+                        customers = 10 + rand.nextInt(40);
+                        totalCustomers = totalCustomers + customers;
+                    }
+                    else {
+                        customers = 5 + rand.nextInt(20);
+                        totalCustomers = totalCustomers + customers;
+                    }
+                    if (orderTerminal) {
+                        serveLimit = 20 + rand.nextInt(50);
+                    }
+                    else {
+                        serveLimit = 10 + rand.nextInt(25);
+                    }
+                    if (serveLimit >= customers) {
+                        serveAmount = customers;
+                    }
+                    else if (serveLimit < customers) {
+                        serveAmount = serveLimit;
+                    }
+                    for (int buyingPhase = 0; buyingPhase <= serveAmount; buyingPhase++) {
+                        int breadUsed = 1 + rand.nextInt(1);
+                        totalResourcesUsed = totalResourcesUsed - breadUsed;
+                        money = money + (breadUsed * bread$sell);
+                        totalEarned = totalEarned + (breadUsed * bread$sell);
+                        
+                        int meatUsed = rand.nextInt(2);
+                        totalResourcesUsed = totalResourcesUsed - meatUsed;
+                        money = money + (meatUsed * meat$sell);
+                        totalEarned = totalEarned + (meatUsed * meat$sell);
+                        
+                        int cheeseUsed = rand.nextInt(1);
+                        totalResourcesUsed = totalResourcesUsed - cheeseUsed;
+                        money = money + (cheeseUsed * cheese$sell);
+                        totalEarned = totalEarned + (cheeseUsed * cheese$sell);
+                        
+                        int vegUsed = rand.nextInt(2);
+                        totalResourcesUsed = totalResourcesUsed - vegUsed;
+                        money = money + (vegUsed * veg$sell);
+                        totalEarned = totalEarned + (vegUsed * veg$sell);
+                        
+                        int sauceUsed = rand.nextInt(2);
+                        totalResourcesUsed = totalResourcesUsed - sauceUsed;
+                        money = money + (sauceUsed * sauce$sell);
+                        totalEarned = totalEarned + (sauceUsed * sauce$sell);
+                        
+                        int drinkUsed = rand.nextInt(1);
+                        totalResourcesUsed = totalResourcesUsed - drinkUsed;
+                        money = money + (drinkUsed * drink$sell);
+                        totalEarned = totalEarned + (drinkUsed * drink$sell);
+                        
+                        if (drinkUsed == 1) {
+                            suppUsed = 2;
+                        }
+                        else {
+                            suppUsed = 1;
+                        }
+                        totalResourcesUsed = totalResourcesUsed - suppUsed;
+                        
+                        money = money + (suppUsed * supp$sell);
+                        totalEarned = totalEarned + (suppUsed * supp$sell);
+                    }
                     break;
                     
                 case 1: //Order resources
@@ -131,8 +203,22 @@ public class Subway_Simulator {
                     while (!leaveStore) {
                         System.out.println("Welcome to the store!\n"
                             + "You currently have $" + money + "\n"
-                            + "(Everything is bought in packages of 25)\n"
-                            + "==============================\n"
+                            + "(Everything is bought in packages of 25)");
+                        if (deliveryDeal){
+                            System.out.println("All prices 25% off because of Delivery Deal!");
+                            boolean pricesDecreased = false;
+                            if (!pricesDecreased) {
+                                bread$cost = (bread$cost / 4) * 3;
+                                meat$cost = (meat$cost / 4) * 3;
+                                cheese$cost = (cheese$cost / 4) * 3;
+                                veg$cost = (veg$cost / 4) * 3;
+                                sauce$cost = (sauce$cost / 4) * 3;
+                                drink$cost = (drink$cost / 4) * 3;
+                                supp$cost = (supp$cost / 4) * 3;
+                                pricesDecreased = true;
+                            }
+                        }
+                        System.out.println("==============================\n"
                             + "What would you like to buy?\n"
                             + "(0) Leave the shop\n"
                             + "(1) Bread: $" + bread$cost + "\n"
@@ -425,12 +511,37 @@ public class Subway_Simulator {
                         + "Welcome to the upgrade shop\n"
                         + "You currently have $" + money + "\n"
                         + "What would you like to buy?\n"
+                        + "(You can select upgrades to read what they do)\n"
                         + "==============================");
                     if (!biggerStorage) {
                         System.out.println("(0) Bigger storage ($200)");
                     }
                     else {
                         System.out.println("(0) Bigger storage (BOUGHT)");
+                    }
+                    if (!orderTerminal) {
+                        System.out.println("(1) Ordering Terminal ($150)");
+                    }
+                    else {
+                        System.out.println("(1) Ordering Terminal (BOUGHT)");
+                    }
+                    if (supplier <= 1) {
+                        System.out.println("(2) Supplier ($100, " + supplier + "/2)");
+                    }
+                    else {
+                        System.out.println("(2) Supplier (MAX 2/2)");
+                    }
+                    if (!deliveryDeal) {
+                        System.out.println("(3) Delivery Deal ($200)");
+                    }
+                    else {
+                        System.out.println("(3) Delivery Deal (BOUGHT)");
+                    }
+                    if (!neonSign) {
+                        System.out.println("(4) Neon Sign ($100)");
+                    }
+                    else {
+                        System.out.println("(4) Neon Sign (BOUGHT)");
                     }
                     break;
                     
