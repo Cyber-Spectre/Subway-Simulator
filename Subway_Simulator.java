@@ -79,6 +79,11 @@ public class Subway_Simulator {
         int supplier = 0;
         boolean deliveryDeal = false;
         boolean neonSign = false;
+        double moneyEarnedToday = 0.00;
+        int incorrectToday = 0;
+        int leftToday = 0;
+        int resourcesUsedToday = 0;
+        boolean customerIncorrectAlready = false;
         
         //Stat variables
         double totalSpent = 0.00;
@@ -133,6 +138,10 @@ public class Subway_Simulator {
                     customers = 0;
                     serveLimit = 0;
                     serveAmount = 0;
+                    moneyEarnedToday = 0.00;
+                    incorrectToday = 0;
+                    leftToday = 0;
+                    resourcesUsedToday = 0;
                     if (neonSign) {
                         customers = 10 + rand.nextInt(40);
                         totalCustomers = totalCustomers + customers;
@@ -152,53 +161,240 @@ public class Subway_Simulator {
                     }
                     else if (serveLimit < customers) {
                         serveAmount = serveLimit;
+                        leftToday = (customers - serveAmount);
+                        totalUnserved = totalUnserved + leftToday;
                     }
                     for (int buyingPhase = 0; buyingPhase <= serveAmount; buyingPhase++) {
-                        int breadUsed = 1 + rand.nextInt(1);
-                        totalResourcesUsed = totalResourcesUsed - breadUsed;
-                        money = money + (breadUsed * bread$sell);
-                        totalEarned = totalEarned + (breadUsed * bread$sell);
                         
-                        int meatUsed = rand.nextInt(2);
-                        totalResourcesUsed = totalResourcesUsed - meatUsed;
-                        money = money + (meatUsed * meat$sell);
-                        totalEarned = totalEarned + (meatUsed * meat$sell);
+                        customerIncorrectAlready = false;
                         
-                        int cheeseUsed = rand.nextInt(1);
-                        totalResourcesUsed = totalResourcesUsed - cheeseUsed;
-                        money = money + (cheeseUsed * cheese$sell);
-                        totalEarned = totalEarned + (cheeseUsed * cheese$sell);
+                        int breadUsed = 1 + rand.nextInt(1); //bread
+                        if (bread < breadUsed){
+                            if (bread == 1) {
+                                breadUsed = 1;
+                                bread = bread - breadUsed;
+                                money = money + (breadUsed * bread$sell);
+                                moneyEarnedToday = (breadUsed * bread$sell);
+                                resourcesUsedToday = resourcesUsedToday + breadUsed;
+                                totalResourcesUsed = totalResourcesUsed + breadUsed;
+                                totalEarned = totalEarned + (breadUsed * bread$sell);
+                                if (!customerIncorrectAlready) {
+                                    incorrectToday = incorrectToday + 1;
+                                    totalServedIncorrect = totalServedIncorrect + 1;
+                                    customerIncorrectAlready = true;
+                                }
+                            }
+                            else {
+                                if (!customerIncorrectAlready) {
+                                    incorrectToday = incorrectToday + 1;
+                                    totalServedIncorrect = totalServedIncorrect + 1;
+                                    customerIncorrectAlready = true;
+                                }
+                            }
+                        }
+                        else {
+                            bread = bread - breadUsed;
+                            money = money + (breadUsed * bread$sell);
+                            moneyEarnedToday = (breadUsed * bread$sell);
+                            resourcesUsedToday = resourcesUsedToday + breadUsed;
+                            totalResourcesUsed = totalResourcesUsed + breadUsed;
+                            totalEarned = totalEarned + (breadUsed * bread$sell);
+                        }
                         
-                        int vegUsed = rand.nextInt(2);
-                        totalResourcesUsed = totalResourcesUsed - vegUsed;
-                        money = money + (vegUsed * veg$sell);
-                        totalEarned = totalEarned + (vegUsed * veg$sell);
+                        int meatUsed = rand.nextInt(2); //meat
+                        if (meat < meatUsed){
+                            if (meat == 1) {
+                                meatUsed = 1;
+                                meat = meat - meatUsed;
+                                money = money + (meatUsed * meat$sell);
+                                moneyEarnedToday = (meatUsed * meat$sell);
+                                resourcesUsedToday = resourcesUsedToday + meatUsed;
+                                totalResourcesUsed = totalResourcesUsed + meatUsed;
+                                totalEarned = totalEarned + (meatUsed * meat$sell);
+                                if (!customerIncorrectAlready) {
+                                    incorrectToday = incorrectToday + 1;
+                                    totalServedIncorrect = totalServedIncorrect + 1;
+                                    customerIncorrectAlready = true;
+                                }
+                            }
+                            else {
+                                if (!customerIncorrectAlready) {
+                                    incorrectToday = incorrectToday + 1;
+                                    totalServedIncorrect = totalServedIncorrect + 1;
+                                    customerIncorrectAlready = true;
+                                }
+                            }
+                        }
+                        else {
+                            meat = meat - meatUsed;
+                            money = money + (meatUsed * meat$sell);
+                            moneyEarnedToday = (meatUsed * meat$sell);
+                            resourcesUsedToday = resourcesUsedToday + meatUsed;
+                            totalResourcesUsed = totalResourcesUsed + meatUsed;
+                            totalEarned = totalEarned + (meatUsed * meat$sell);
+                        }
                         
-                        int sauceUsed = rand.nextInt(2);
-                        totalResourcesUsed = totalResourcesUsed - sauceUsed;
-                        money = money + (sauceUsed * sauce$sell);
-                        totalEarned = totalEarned + (sauceUsed * sauce$sell);
+                        int cheeseUsed = rand.nextInt(1); //cheese
+                        if (cheese < cheeseUsed){
+                                if (!customerIncorrectAlready) {
+                                    incorrectToday = incorrectToday + 1;
+                                    totalServedIncorrect = totalServedIncorrect + 1;
+                                    customerIncorrectAlready = true;
+                                }
+                        }
+                        else {
+                            cheese = cheese - cheeseUsed;
+                            money = money + (cheeseUsed * cheese$sell);
+                            moneyEarnedToday = (cheeseUsed * cheese$sell);
+                            resourcesUsedToday = resourcesUsedToday + cheeseUsed;
+                            totalResourcesUsed = totalResourcesUsed + cheeseUsed;
+                            totalEarned = totalEarned + (cheeseUsed * cheese$sell);
+                        }
                         
-                        int drinkUsed = rand.nextInt(1);
-                        totalResourcesUsed = totalResourcesUsed - drinkUsed;
-                        money = money + (drinkUsed * drink$sell);
-                        totalEarned = totalEarned + (drinkUsed * drink$sell);
+                        int vegUsed = rand.nextInt(2); //vegetables
+                        if (veg < vegUsed){
+                            if (veg == 1) {
+                                vegUsed = 1;
+                                veg = veg - vegUsed;
+                                money = money + (vegUsed * veg$sell);
+                                moneyEarnedToday = (vegUsed * veg$sell);
+                                resourcesUsedToday = resourcesUsedToday + vegUsed;
+                                totalResourcesUsed = totalResourcesUsed + vegUsed;
+                                totalEarned = totalEarned + (vegUsed * veg$sell);
+                                if (!customerIncorrectAlready) {
+                                    incorrectToday = incorrectToday + 1;
+                                    totalServedIncorrect = totalServedIncorrect + 1;
+                                    customerIncorrectAlready = true;
+                                }
+                            }
+                            else {
+                                if (!customerIncorrectAlready) {
+                                    incorrectToday = incorrectToday + 1;
+                                    totalServedIncorrect = totalServedIncorrect + 1;
+                                    customerIncorrectAlready = true;
+                                }
+                            }
+                        }
+                        else {
+                            veg = veg - vegUsed;
+                            money = money + (vegUsed * veg$sell);
+                            moneyEarnedToday = (vegUsed * veg$sell);
+                            resourcesUsedToday = resourcesUsedToday + vegUsed;
+                            totalResourcesUsed = totalResourcesUsed + vegUsed;
+                            totalEarned = totalEarned + (vegUsed * veg$sell);
+                        }
                         
-                        if (drinkUsed == 1) {
+                        int sauceUsed = rand.nextInt(2); //sauce
+                        if (sauce < sauceUsed){
+                            if (sauce == 1) {
+                                sauceUsed = 1;
+                                sauce = sauce - sauceUsed;
+                                money = money + (sauceUsed * sauce$sell);
+                                moneyEarnedToday = (sauceUsed * sauce$sell);
+                                resourcesUsedToday = resourcesUsedToday + sauceUsed;
+                                totalResourcesUsed = totalResourcesUsed + sauceUsed;
+                                totalEarned = totalEarned + (sauceUsed * sauce$sell);
+                                if (!customerIncorrectAlready) {
+                                    incorrectToday = incorrectToday + 1;
+                                    totalServedIncorrect = totalServedIncorrect + 1;
+                                    customerIncorrectAlready = true;
+                                }
+                            }
+                            else {
+                                if (!customerIncorrectAlready) {
+                                    incorrectToday = incorrectToday + 1;
+                                    totalServedIncorrect = totalServedIncorrect + 1;
+                                    customerIncorrectAlready = true;
+                                }
+                            }
+                        }
+                        else {
+                            sauce = sauce - sauceUsed;
+                            money = money + (sauceUsed * sauce$sell);
+                            moneyEarnedToday = (sauceUsed * sauce$sell);
+                            resourcesUsedToday = resourcesUsedToday + sauceUsed;
+                            totalResourcesUsed = totalResourcesUsed + sauceUsed;
+                            totalEarned = totalEarned + (sauceUsed * sauce$sell);
+                        }
+                        
+                        int drinkUsed = rand.nextInt(1); //drink
+                        if (drink < drinkUsed){
+                            if (drink == 1) {
+                                drinkUsed = 1;
+                                drink = drink - drinkUsed;
+                                money = money + (drinkUsed * drink$sell);
+                                moneyEarnedToday = (drinkUsed * drink$sell);
+                                resourcesUsedToday = resourcesUsedToday + drinkUsed;
+                                totalResourcesUsed = totalResourcesUsed + drinkUsed;
+                                totalEarned = totalEarned + (drinkUsed * drink$sell);
+                                if (!customerIncorrectAlready) {
+                                    incorrectToday = incorrectToday + 1;
+                                    totalServedIncorrect = totalServedIncorrect + 1;
+                                    customerIncorrectAlready = true;
+                                }
+                            }
+                            else {
+                                if (!customerIncorrectAlready) {
+                                    incorrectToday = incorrectToday + 1;
+                                    totalServedIncorrect = totalServedIncorrect + 1;
+                                    customerIncorrectAlready = true;
+                                }
+                            }
+                        }
+                        else {
+                            drink = drink - drinkUsed;
+                            money = money + (drinkUsed * drink$sell);
+                            moneyEarnedToday = (drinkUsed * drink$sell);
+                            resourcesUsedToday = resourcesUsedToday + drinkUsed;
+                            totalResourcesUsed = totalResourcesUsed + drinkUsed;
+                            totalEarned = totalEarned + (drinkUsed * drink$sell);
+                        }
+                        
+                        if (drinkUsed == 1) { //supplies
                             suppUsed = 2;
                         }
                         else {
                             suppUsed = 1;
                         }
-                        totalResourcesUsed = totalResourcesUsed - suppUsed;
+                        if (drink < drinkUsed){
+                            if (drink == 1) {
+                                drinkUsed = 1;
+                                drink = drink - drinkUsed;
+                                money = money + (drinkUsed * drink$sell);
+                                moneyEarnedToday = (drinkUsed * drink$sell);
+                                resourcesUsedToday = resourcesUsedToday + drinkUsed;
+                                totalResourcesUsed = totalResourcesUsed + drinkUsed;
+                                totalEarned = totalEarned + (drinkUsed * drink$sell);
+                                if (!customerIncorrectAlready) {
+                                    incorrectToday = incorrectToday + 1;
+                                    totalServedIncorrect = totalServedIncorrect + 1;
+                                    customerIncorrectAlready = true;
+                                }
+                            }
+                            else {
+                                if (!customerIncorrectAlready) {
+                                    incorrectToday = incorrectToday + 1;
+                                    totalServedIncorrect = totalServedIncorrect + 1;
+                                    customerIncorrectAlready = true;
+                                }
+                                
+                            }
                         
-                        money = money + (suppUsed * supp$sell);
-                        totalEarned = totalEarned + (suppUsed * supp$sell);
+                        }
+                        else {
+                            drink = drink - drinkUsed;
+                            money = money + (drinkUsed * drink$sell);
+                            moneyEarnedToday = (drinkUsed * drink$sell);
+                            resourcesUsedToday = resourcesUsedToday + drinkUsed;
+                            totalResourcesUsed = totalResourcesUsed + drinkUsed;
+                            totalEarned = totalEarned + (drinkUsed * drink$sell);
                     }
-                    break;
-                    
-                case 1: //Order resources
-                    Boolean leaveStore = false;
+                }
+                            System.out.println("You had " + customers + " customers today");
+                    break; 
+               
+                case 1: //Order Resources
+                    boolean leaveStore = false;
                     int storeChoice;
                     while (!leaveStore) {
                         System.out.println("Welcome to the store!\n"
@@ -502,9 +698,11 @@ public class Subway_Simulator {
                                 totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
                                 break;
+                                
                         }
+                        
                     }
-                    break;
+                break;
                     
                 case 2: //upgrades
                     System.out.println("==============================\n"
@@ -567,10 +765,12 @@ public class Subway_Simulator {
                     playAgain = false;
                     break;
                 
-            }
+                    }
             
         }
         while (playAgain);
+        
+        
         
     }
     
