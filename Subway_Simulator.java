@@ -71,7 +71,6 @@ public class Subway_Simulator {
         int customers = 0;
         int serveLimit = 0;
         int serveAmount = 0;
-        int suppUsed = 0;
         
         //Extra variables
         boolean biggerStorage = false;
@@ -80,10 +79,16 @@ public class Subway_Simulator {
         boolean deliveryDeal = false;
         boolean neonSign = false;
         double moneyEarnedToday = 0.00;
+        int correctToday = 0;
         int incorrectToday = 0;
         int leftToday = 0;
         int resourcesUsedToday = 0;
         boolean customerIncorrectAlready = false;
+        int loyalCalc;
+        int unloyalCalc;
+        int loyalGainedToday = 0;
+        int loyalLostToday = 0;
+        int loyalSub = 0;
         
         //Stat variables
         double totalSpent = 0.00;
@@ -95,7 +100,7 @@ public class Subway_Simulator {
         int totalServedIncorrect = 0;
         int totalUnserved = 0;
         int currentLoyal = 0;
-        int loyalRecieved = 0;
+        int loyalReceived = 0;
         int loyalLost = 0;
         
         //Game code
@@ -139,9 +144,14 @@ public class Subway_Simulator {
                     serveLimit = 0;
                     serveAmount = 0;
                     moneyEarnedToday = 0.00;
+                    correctToday = 0;
                     incorrectToday = 0;
                     leftToday = 0;
                     resourcesUsedToday = 0;
+                    loyalGainedToday = 0;
+                    loyalCalc = 0;
+                    loyalLostToday = 0;
+                    unloyalCalc = 0;
                     if (neonSign) {
                         customers = 10 + rand.nextInt(40);
                         totalCustomers = totalCustomers + customers;
@@ -150,6 +160,7 @@ public class Subway_Simulator {
                         customers = 5 + rand.nextInt(20);
                         totalCustomers = totalCustomers + customers;
                     }
+                    customers = customers + currentLoyal;
                     if (orderTerminal) {
                         serveLimit = 20 + rand.nextInt(50);
                     }
@@ -164,11 +175,18 @@ public class Subway_Simulator {
                         leftToday = (customers - serveAmount);
                         totalUnserved = totalUnserved + leftToday;
                     }
-                    for (int buyingPhase = 0; buyingPhase <= serveAmount; buyingPhase++) {
+                    for (int buyingPhase = 1; buyingPhase == serveAmount; buyingPhase++) {
+                        int breadUsed = 0;
+                        int meatUsed = 0;
+                        int cheeseUsed = 0;
+                        int vegUsed = 0;
+                        int sauceUsed = 0;
+                        int drinkUsed = 0;
+                        int suppUsed = 0;
                         
                         customerIncorrectAlready = false;
                         
-                        int breadUsed = 1 + rand.nextInt(1); //bread
+                        breadUsed = 1 + rand.nextInt(1); //bread
                         if (bread < breadUsed){
                             if (bread == 1) {
                                 breadUsed = 1;
@@ -199,9 +217,10 @@ public class Subway_Simulator {
                             resourcesUsedToday = resourcesUsedToday + breadUsed;
                             totalResourcesUsed = totalResourcesUsed + breadUsed;
                             totalEarned = totalEarned + (breadUsed * bread$sell);
+                            
                         }
                         
-                        int meatUsed = rand.nextInt(2); //meat
+                        meatUsed = rand.nextInt(2); //meat
                         if (meat < meatUsed){
                             if (meat == 1) {
                                 meatUsed = 1;
@@ -234,7 +253,7 @@ public class Subway_Simulator {
                             totalEarned = totalEarned + (meatUsed * meat$sell);
                         }
                         
-                        int cheeseUsed = rand.nextInt(1); //cheese
+                        cheeseUsed = rand.nextInt(1); //cheese
                         if (cheese < cheeseUsed){
                                 if (!customerIncorrectAlready) {
                                     incorrectToday = incorrectToday + 1;
@@ -251,7 +270,7 @@ public class Subway_Simulator {
                             totalEarned = totalEarned + (cheeseUsed * cheese$sell);
                         }
                         
-                        int vegUsed = rand.nextInt(2); //vegetables
+                        vegUsed = rand.nextInt(2); //vegetables
                         if (veg < vegUsed){
                             if (veg == 1) {
                                 vegUsed = 1;
@@ -284,7 +303,7 @@ public class Subway_Simulator {
                             totalEarned = totalEarned + (vegUsed * veg$sell);
                         }
                         
-                        int sauceUsed = rand.nextInt(2); //sauce
+                        sauceUsed = rand.nextInt(2); //sauce
                         if (sauce < sauceUsed){
                             if (sauce == 1) {
                                 sauceUsed = 1;
@@ -317,7 +336,7 @@ public class Subway_Simulator {
                             totalEarned = totalEarned + (sauceUsed * sauce$sell);
                         }
                         
-                        int drinkUsed = rand.nextInt(1); //drink
+                        drinkUsed = rand.nextInt(1); //drink
                         if (drink < drinkUsed){
                             if (drink == 1) {
                                 drinkUsed = 1;
@@ -356,15 +375,15 @@ public class Subway_Simulator {
                         else {
                             suppUsed = 1;
                         }
-                        if (drink < drinkUsed){
-                            if (drink == 1) {
-                                drinkUsed = 1;
-                                drink = drink - drinkUsed;
-                                money = money + (drinkUsed * drink$sell);
-                                moneyEarnedToday = (drinkUsed * drink$sell);
-                                resourcesUsedToday = resourcesUsedToday + drinkUsed;
-                                totalResourcesUsed = totalResourcesUsed + drinkUsed;
-                                totalEarned = totalEarned + (drinkUsed * drink$sell);
+                        if (supp < suppUsed){
+                            if (supp == 1) {
+                                suppUsed = 1;
+                                supp = supp - suppUsed;
+                                money = money + (suppUsed * supp$sell);
+                                moneyEarnedToday = (suppUsed * supp$sell);
+                                resourcesUsedToday = resourcesUsedToday + suppUsed;
+                                totalResourcesUsed = totalResourcesUsed + suppUsed;
+                                totalEarned = totalEarned + (suppUsed * supp$sell);
                                 if (!customerIncorrectAlready) {
                                     incorrectToday = incorrectToday + 1;
                                     totalServedIncorrect = totalServedIncorrect + 1;
@@ -382,15 +401,51 @@ public class Subway_Simulator {
                         
                         }
                         else {
-                            drink = drink - drinkUsed;
-                            money = money + (drinkUsed * drink$sell);
-                            moneyEarnedToday = (drinkUsed * drink$sell);
-                            resourcesUsedToday = resourcesUsedToday + drinkUsed;
-                            totalResourcesUsed = totalResourcesUsed + drinkUsed;
-                            totalEarned = totalEarned + (drinkUsed * drink$sell);
+                            supp = supp - suppUsed;
+                            money = money + (suppUsed * supp$sell);
+                            moneyEarnedToday = (suppUsed * supp$sell);
+                            resourcesUsedToday = resourcesUsedToday + suppUsed;
+                            totalResourcesUsed = totalResourcesUsed + suppUsed;
+                            totalEarned = totalEarned + (suppUsed * supp$sell);
+                    }
+                    if (!customerIncorrectAlready) {
+                        correctToday = correctToday + 1;
+                        totalServedCorrect = totalServedCorrect + 1;
                     }
                 }
-                            System.out.println("You had " + customers + " customers today");
+                for (int unloyalPhase = 0; unloyalPhase == currentLoyal; unloyalPhase++) {
+                    loyalSub = currentLoyal;
+                    if (loyalSub > 0);
+                    unloyalCalc = rand.nextInt(100);
+                    if (loyalCalc <= 20) {
+                        loyalLostToday = 1;
+                        loyalLost = 1;
+                        loyalSub = loyalSub - 1;
+                    }
+                    currentLoyal = currentLoyal - loyalLostToday; 
+                }
+                for (int loyalPhase = 0; loyalPhase == correctToday; loyalPhase++) {
+                    loyalCalc = rand.nextInt(100);
+                    if (unloyalCalc <= 10) {
+                        loyalGainedToday = loyalGainedToday + 1;
+                        loyalReceived = loyalReceived + 1;
+                        currentLoyal = currentLoyal + 1;
+                    }
+                }
+                            System.out.println("==============================\n"
+                                + "You had " + customers + " customers today:\n"
+                                    + "---- " + correctToday + " were served correctly;\n"
+                                    + "---- " + incorrectToday + " were served incorrectly;\n"
+                                    + "---- " + leftToday + " did not get served\n"
+                                + "==============================\n"
+                                + "You earned $" + moneyEarnedToday + " from sales today\n"
+                                + "You used " + resourcesUsedToday + " resources today, make sure you buy more if needed\n"
+                                + "==============================\n"
+                                + "You have " + currentLoyal + " loyal customers currently:\n"
+                                    + "---- " + loyalGainedToday + " were gained;\n"
+                                    + "---- " + loyalLostToday + " were lost");
+                            
+                            day = day + 1;
                     break; 
                
                 case 1: //Order Resources
@@ -755,7 +810,7 @@ public class Subway_Simulator {
                             + "---- " + totalServedIncorrect + " served incorrectly\n"
                             + "---- " + totalUnserved + " have left the restaurant unserved\n"
                         + "You currently have " + currentLoyal + " loyal customers;\n"
-                            + "---- " + loyalRecieved + " Have been recieved\n"
+                            + "---- " + loyalReceived + " Have been recieved\n"
                             + "---- " + loyalLost + " Have been lost\n"
                         + "");
                     break;
