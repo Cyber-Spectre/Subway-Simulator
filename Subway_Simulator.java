@@ -175,7 +175,7 @@ public class Subway_Simulator {
                         leftToday = (customers - serveAmount);
                         totalUnserved = totalUnserved + leftToday;
                     }
-                    for (int buyingPhase = 1; buyingPhase == serveAmount; buyingPhase++) {
+                    for (int buyingPhase = 0; buyingPhase != serveAmount; buyingPhase++) {
                         int breadUsed = 0;
                         int meatUsed = 0;
                         int cheeseUsed = 0;
@@ -192,7 +192,7 @@ public class Subway_Simulator {
                                 breadUsed = 1;
                                 bread = bread - breadUsed;
                                 money = money + (breadUsed * bread$sell);
-                                moneyEarnedToday = (breadUsed * bread$sell);
+                                moneyEarnedToday = moneyEarnedToday + (breadUsed * bread$sell);
                                 resourcesUsedToday = resourcesUsedToday + breadUsed;
                                 totalResourcesUsed = totalResourcesUsed + breadUsed;
                                 totalEarned = totalEarned + (breadUsed * bread$sell);
@@ -213,7 +213,7 @@ public class Subway_Simulator {
                         else {
                             bread = bread - breadUsed;
                             money = money + (breadUsed * bread$sell);
-                            moneyEarnedToday = (breadUsed * bread$sell);
+                            moneyEarnedToday = moneyEarnedToday + (breadUsed * bread$sell);
                             resourcesUsedToday = resourcesUsedToday + breadUsed;
                             totalResourcesUsed = totalResourcesUsed + breadUsed;
                             totalEarned = totalEarned + (breadUsed * bread$sell);
@@ -226,7 +226,7 @@ public class Subway_Simulator {
                                 meatUsed = 1;
                                 meat = meat - meatUsed;
                                 money = money + (meatUsed * meat$sell);
-                                moneyEarnedToday = (meatUsed * meat$sell);
+                                moneyEarnedToday = moneyEarnedToday + (meatUsed * meat$sell);
                                 resourcesUsedToday = resourcesUsedToday + meatUsed;
                                 totalResourcesUsed = totalResourcesUsed + meatUsed;
                                 totalEarned = totalEarned + (meatUsed * meat$sell);
@@ -247,7 +247,7 @@ public class Subway_Simulator {
                         else {
                             meat = meat - meatUsed;
                             money = money + (meatUsed * meat$sell);
-                            moneyEarnedToday = (meatUsed * meat$sell);
+                            moneyEarnedToday = moneyEarnedToday + (meatUsed * meat$sell);
                             resourcesUsedToday = resourcesUsedToday + meatUsed;
                             totalResourcesUsed = totalResourcesUsed + meatUsed;
                             totalEarned = totalEarned + (meatUsed * meat$sell);
@@ -264,7 +264,7 @@ public class Subway_Simulator {
                         else {
                             cheese = cheese - cheeseUsed;
                             money = money + (cheeseUsed * cheese$sell);
-                            moneyEarnedToday = (cheeseUsed * cheese$sell);
+                            moneyEarnedToday = moneyEarnedToday + (cheeseUsed * cheese$sell);
                             resourcesUsedToday = resourcesUsedToday + cheeseUsed;
                             totalResourcesUsed = totalResourcesUsed + cheeseUsed;
                             totalEarned = totalEarned + (cheeseUsed * cheese$sell);
@@ -276,7 +276,7 @@ public class Subway_Simulator {
                                 vegUsed = 1;
                                 veg = veg - vegUsed;
                                 money = money + (vegUsed * veg$sell);
-                                moneyEarnedToday = (vegUsed * veg$sell);
+                                moneyEarnedToday = moneyEarnedToday + (vegUsed * veg$sell);
                                 resourcesUsedToday = resourcesUsedToday + vegUsed;
                                 totalResourcesUsed = totalResourcesUsed + vegUsed;
                                 totalEarned = totalEarned + (vegUsed * veg$sell);
@@ -297,7 +297,7 @@ public class Subway_Simulator {
                         else {
                             veg = veg - vegUsed;
                             money = money + (vegUsed * veg$sell);
-                            moneyEarnedToday = (vegUsed * veg$sell);
+                            moneyEarnedToday = moneyEarnedToday + (vegUsed * veg$sell);
                             resourcesUsedToday = resourcesUsedToday + vegUsed;
                             totalResourcesUsed = totalResourcesUsed + vegUsed;
                             totalEarned = totalEarned + (vegUsed * veg$sell);
@@ -309,7 +309,7 @@ public class Subway_Simulator {
                                 sauceUsed = 1;
                                 sauce = sauce - sauceUsed;
                                 money = money + (sauceUsed * sauce$sell);
-                                moneyEarnedToday = (sauceUsed * sauce$sell);
+                                moneyEarnedToday = moneyEarnedToday + (sauceUsed * sauce$sell);
                                 resourcesUsedToday = resourcesUsedToday + sauceUsed;
                                 totalResourcesUsed = totalResourcesUsed + sauceUsed;
                                 totalEarned = totalEarned + (sauceUsed * sauce$sell);
@@ -330,7 +330,7 @@ public class Subway_Simulator {
                         else {
                             sauce = sauce - sauceUsed;
                             money = money + (sauceUsed * sauce$sell);
-                            moneyEarnedToday = (sauceUsed * sauce$sell);
+                            moneyEarnedToday = moneyEarnedToday + (sauceUsed * sauce$sell);
                             resourcesUsedToday = resourcesUsedToday + sauceUsed;
                             totalResourcesUsed = totalResourcesUsed + sauceUsed;
                             totalEarned = totalEarned + (sauceUsed * sauce$sell);
@@ -342,7 +342,7 @@ public class Subway_Simulator {
                                 drinkUsed = 1;
                                 drink = drink - drinkUsed;
                                 money = money + (drinkUsed * drink$sell);
-                                moneyEarnedToday = (drinkUsed * drink$sell);
+                                moneyEarnedToday = moneyEarnedToday + (drinkUsed * drink$sell);
                                 resourcesUsedToday = resourcesUsedToday + drinkUsed;
                                 totalResourcesUsed = totalResourcesUsed + drinkUsed;
                                 totalEarned = totalEarned + (drinkUsed * drink$sell);
@@ -363,7 +363,7 @@ public class Subway_Simulator {
                         else {
                             drink = drink - drinkUsed;
                             money = money + (drinkUsed * drink$sell);
-                            moneyEarnedToday = (drinkUsed * drink$sell);
+                            moneyEarnedToday = moneyEarnedToday + (drinkUsed * drink$sell);
                             resourcesUsedToday = resourcesUsedToday + drinkUsed;
                             totalResourcesUsed = totalResourcesUsed + drinkUsed;
                             totalEarned = totalEarned + (drinkUsed * drink$sell);
@@ -380,7 +380,7 @@ public class Subway_Simulator {
                                 suppUsed = 1;
                                 supp = supp - suppUsed;
                                 money = money + (suppUsed * supp$sell);
-                                moneyEarnedToday = (suppUsed * supp$sell);
+                                moneyEarnedToday = moneyEarnedToday + (suppUsed * supp$sell);
                                 resourcesUsedToday = resourcesUsedToday + suppUsed;
                                 totalResourcesUsed = totalResourcesUsed + suppUsed;
                                 totalEarned = totalEarned + (suppUsed * supp$sell);
@@ -403,7 +403,7 @@ public class Subway_Simulator {
                         else {
                             supp = supp - suppUsed;
                             money = money + (suppUsed * supp$sell);
-                            moneyEarnedToday = (suppUsed * supp$sell);
+                            moneyEarnedToday = moneyEarnedToday + (suppUsed * supp$sell);
                             resourcesUsedToday = resourcesUsedToday + suppUsed;
                             totalResourcesUsed = totalResourcesUsed + suppUsed;
                             totalEarned = totalEarned + (suppUsed * supp$sell);
@@ -413,7 +413,7 @@ public class Subway_Simulator {
                         totalServedCorrect = totalServedCorrect + 1;
                     }
                 }
-                for (int unloyalPhase = 0; unloyalPhase == currentLoyal; unloyalPhase++) {
+                for (int unloyalPhase = 0; unloyalPhase != currentLoyal; unloyalPhase++) {
                     loyalSub = currentLoyal;
                     if (loyalSub > 0);
                     unloyalCalc = rand.nextInt(100);
@@ -424,14 +424,23 @@ public class Subway_Simulator {
                     }
                     currentLoyal = currentLoyal - loyalLostToday; 
                 }
-                for (int loyalPhase = 0; loyalPhase == correctToday; loyalPhase++) {
+                for (int loyalPhase = 0; loyalPhase != correctToday; loyalPhase++) {
                     loyalCalc = rand.nextInt(100);
-                    if (unloyalCalc <= 10) {
+                    if (loyalCalc <= 10) {
                         loyalGainedToday = loyalGainedToday + 1;
                         loyalReceived = loyalReceived + 1;
                         currentLoyal = currentLoyal + 1;
                     }
                 }
+                
+                    moneyEarnedToday = moneyEarnedToday * 100;
+                    moneyEarnedToday = Math.round(moneyEarnedToday);
+                    moneyEarnedToday = moneyEarnedToday / 100;
+                
+                    money = money * 100;
+                    money = Math.round(money);
+                    money = money / 100;
+                
                             System.out.println("==============================\n"
                                 + "You had " + customers + " customers today:\n"
                                     + "---- " + correctToday + " were served correctly;\n"
