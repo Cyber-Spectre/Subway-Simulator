@@ -75,7 +75,7 @@ public class Subway_Simulator {
         //Extra variables
         boolean biggerStorage = false;
         boolean orderTerminal = false;
-        int supplier = 0;
+        int supplierAmount = 0;
         boolean deliveryDeal = false;
         boolean neonSign = false;
         double moneyEarnedToday = 0.00;
@@ -152,6 +152,22 @@ public class Subway_Simulator {
                     loyalCalc = 0;
                     loyalLostToday = 0;
                     unloyalCalc = 0;
+                    if (supplierAmount > 0) {
+                        int supplyRoll;
+                        for (int supplierPhase = 0; supplierPhase != supplierAmount; supplierPhase++) {
+                            boolean whileSupply = false;
+                            while (!whileSupply) {
+                            supplyRoll = rand.nextInt(6) + 1;
+                            if (supplyRoll == 1) {
+                                bread = bread + 25;
+                                if (!biggerStorage) {
+                                    
+                                }
+                            }
+                        }
+                        
+                    }
+                }
                     if (neonSign) {
                         customers = 10 + rand.nextInt(40);
                         totalCustomers = totalCustomers + customers;
@@ -413,10 +429,11 @@ public class Subway_Simulator {
                         totalServedCorrect = totalServedCorrect + 1;
                     }
                 }
-                for (int unloyalPhase = 0; unloyalPhase != currentLoyal; unloyalPhase++) {
+                for (int unloyalPhase = 0; unloyalPhase != (incorrectToday + leftToday); unloyalPhase++) {
                     loyalSub = currentLoyal;
-                    if (loyalSub > 0);
-                    unloyalCalc = rand.nextInt(100);
+                    if (loyalSub > 0) {
+                        unloyalCalc = rand.nextInt(100);
+                    }
                     if (loyalCalc <= 20) {
                         loyalLostToday = 1;
                         loyalLost = 1;
@@ -426,7 +443,7 @@ public class Subway_Simulator {
                 }
                 for (int loyalPhase = 0; loyalPhase != correctToday; loyalPhase++) {
                     loyalCalc = rand.nextInt(100);
-                    if (loyalCalc <= 10) {
+                    if (loyalCalc <= 5) {
                         loyalGainedToday = loyalGainedToday + 1;
                         loyalReceived = loyalReceived + 1;
                         currentLoyal = currentLoyal + 1;
@@ -769,42 +786,167 @@ public class Subway_Simulator {
                 break;
                     
                 case 2: //upgrades
+                    int upgradeChoice, buyUpgrade;
+                    boolean leaveUpgrades = false;
+                    while(!leaveUpgrades) {
                     System.out.println("==============================\n"
                         + "Welcome to the upgrade shop\n"
                         + "You currently have $" + money + "\n"
                         + "What would you like to buy?\n"
                         + "(You can select upgrades to read what they do)\n"
                         + "==============================");
+                        System.out.println("(0) Leave Upgrades");
                     if (!biggerStorage) {
-                        System.out.println("(0) Bigger storage ($200)");
+                        System.out.println("(1) Bigger storage ($200)");
                     }
                     else {
-                        System.out.println("(0) Bigger storage (BOUGHT)");
+                        System.out.println("(1) Bigger storage (BOUGHT)");
                     }
                     if (!orderTerminal) {
-                        System.out.println("(1) Ordering Terminal ($150)");
+                        System.out.println("(2) Ordering Terminal ($150)");
                     }
                     else {
-                        System.out.println("(1) Ordering Terminal (BOUGHT)");
+                        System.out.println("(2) Ordering Terminal (BOUGHT)");
                     }
-                    if (supplier <= 1) {
-                        System.out.println("(2) Supplier ($100, " + supplier + "/2)");
+                    if (supplierAmount <= 1) {
+                        System.out.println("(3) Supplier ($100) (" + supplierAmount + "/2)");
                     }
                     else {
-                        System.out.println("(2) Supplier (MAX 2/2)");
+                        System.out.println("(3) Supplier (MAX 2/2)");
                     }
                     if (!deliveryDeal) {
-                        System.out.println("(3) Delivery Deal ($200)");
+                        System.out.println("(4) Delivery Deal ($200)");
                     }
                     else {
-                        System.out.println("(3) Delivery Deal (BOUGHT)");
+                        System.out.println("(4) Delivery Deal (BOUGHT)");
                     }
                     if (!neonSign) {
-                        System.out.println("(4) Neon Sign ($100)");
+                        System.out.println("(5) Neon Sign ($100)");
                     }
                     else {
-                        System.out.println("(4) Neon Sign (BOUGHT)");
+                        System.out.println("(5) Neon Sign (BOUGHT)");
                     }
+                    System.out.println("==============================");
+                    
+                    upgradeChoice = scan1.nextInt();
+                    
+                    switch (upgradeChoice) {
+                        case 0:
+                            leaveUpgrades = true;
+                            break;
+                        case 1:
+                            System.out.println("==============================\n"
+                                + "Bigger storage allows you to hold 300 units of every resource instead of 150.");
+                            if (!biggerStorage) {
+                                System.out.println("This upgrade costs $200, would you like to buy it?\n"
+                                    + "(1) Yes\n"
+                                    + "(2) No");
+                                buyUpgrade = scan1.nextInt();
+                                if (buyUpgrade == 1) {
+                                    money = money - 200.00;
+                                    totalSpent = totalSpent = 200.00;
+                                    biggerStorage = true;
+                                }
+                            }
+                            else {
+                                System.out.println("You already have this upgrade.\n"
+                                    + "==============================");
+                            }
+                            break;
+                        case 2:
+                           System.out.println("==============================\n"
+                                + "The ordering terminal allows you to serve more customers in a day.");
+                            if (!orderTerminal) {
+                                System.out.println("This upgrade costs $150, would you like to buy it?\n"
+                                    + "(1) Yes\n"
+                                    + "(2) No");
+                                buyUpgrade = scan1.nextInt();
+                                if (buyUpgrade == 1) {
+                                    money = money - 150.00;
+                                    totalSpent = totalSpent = 150.00;
+                                    orderTerminal = true;
+                                }
+                            }
+                            else {
+                                System.out.println("You already have this upgrade.\n"
+                                    + "==============================");
+                            }
+                            break; 
+                        case 3:
+                           System.out.println("==============================\n"
+                                + "Suppliers will buy you one package of a random resource every day.");
+                            if (supplierAmount == 1) {
+                                System.out.println("Suppliers cost $100, you have 1/2, would you like to buy another supplier?\n"
+                                        + "(1) Yes\n"
+                                        + "(2) No");
+                                buyUpgrade = scan1.nextInt();
+                                if (buyUpgrade == 1) {
+                                    money = money - 100.00;
+                                    totalSpent = totalSpent = 100.00;
+                                    supplierAmount = 2;
+                                }
+                            }
+                            else if (supplierAmount == 0) {
+                                System.out.println("Suppliers cost $100 each, you have 0/2, how many suppliers would you like to buy?\n"
+                                    + "(0) 0\n"
+                                    + "(1) 1\n"
+                                    + "(2) 2");
+                                buyUpgrade = scan1.nextInt();
+                                if (buyUpgrade == 1) {
+                                    money = money - 100.00;
+                                    totalSpent = totalSpent = 100.00;
+                                    supplierAmount = 1;
+                                }
+                                else if (buyUpgrade == 2) {
+                                    money = money - 200.00;
+                                    totalSpent = totalSpent = 200.00;
+                                    supplierAmount = 2;
+                                }
+                            }
+                            else {
+                                System.out.println("You have the max amount of suppliers already. 2/2");
+                            }
+                            break; 
+                        case 4:
+                            System.out.println("==============================\n"
+                                + "Delivery deal makes all resource orders 25% off.");
+                            if (!deliveryDeal) {
+                                System.out.println("This upgrade costs $200, would you like to buy it?\n"
+                                    + "(1) Yes\n"
+                                    + "(2) No");
+                                buyUpgrade = scan1.nextInt();
+                                if (buyUpgrade == 1) {
+                                    money = money - 200.00;
+                                    totalSpent = totalSpent = 200.00;
+                                    deliveryDeal = true;
+                                }
+                            }
+                            else {
+                                System.out.println("You already have this upgrade.\n"
+                                    + "==============================");
+                            }
+                            break;
+                        case 5:
+                            System.out.println("==============================\n"
+                                + "The Neon sign arracts more customers every day.");
+                            if (!neonSign) {
+                                System.out.println("This upgrade costs $100, would you like to buy it?\n"
+                                    + "(1) Yes\n"
+                                    + "(2) No");
+                                buyUpgrade = scan1.nextInt();
+                                if (buyUpgrade == 1) {
+                                    money = money - 100.00;
+                                    totalSpent = totalSpent = 100.00;
+                                    neonSign = true;
+                                }
+                            }
+                            else {
+                                System.out.println("You already have this upgrade.\n"
+                                    + "==============================");
+                            }
+                            break;
+                    }
+                }
                     break;
                     
                 case 3: //Game stats
@@ -830,7 +972,36 @@ public class Subway_Simulator {
                     break;
                 
                     }
+                
             
+            if (daysLeft == 0) {
+                System.out.println("The manager has returned, you won!\n"
+                    + "You ended the game with $" + money);
+                if (money == 1000.00) {
+                    System.out.println("You did a great job, you got promoted!");
+                    playAgain = false;
+                }
+            }
+            else if (money <= 0.00) {
+                System.out.println("You ran out of money, you lost!");
+                playAgain = false;
+            }
+            if (!playAgain) {
+                System.out.println("==============================\n"
+                    + "Final game stats:\n"
+                    + "You have spent: $" + totalSpent + "\n"
+                    + "You have earned: $" + totalEarned + "\n"
+                    + "You have bought " + totalResourcesBought + " resources\n"
+                    + "You have used " + totalResourcesUsed + " resources\n"
+                    + "You've had a total of " + totalCustomers + " customers;\n"
+                        + "---- " + totalServedCorrect + " served correctly\n"
+                        + "---- " + totalServedIncorrect + " served incorrectly\n"
+                        + "---- " + totalUnserved + " have left the restaurant unserved\n"
+                    + "You currently have " + currentLoyal + " loyal customers;\n"
+                        + "---- " + loyalReceived + " Have been recieved\n"
+                        + "---- " + loyalLost + " Have been lost\n"
+                    + "==============================");
+            }
         }
         while (playAgain);
         
