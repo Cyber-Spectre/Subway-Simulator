@@ -57,13 +57,13 @@ public class Subway_Simulator {
         every resource adds onto total
         (per 1 unit)
         */
-        double bread$sell = 0.35;
-        double meat$sell = 0.60;
-        double cheese$sell = 0.40;
-        double veg$sell = 0.20;
-        double sauce$sell = 0.15;
-        double drink$sell = 0.08;
-        double supp$sell = 0.18;
+        double bread$sell = 0.45;
+        double meat$sell = 0.80;
+        double cheese$sell = 0.50;
+        double veg$sell = 0.30;
+        double sauce$sell = 0.20;
+        double drink$sell = 0.12;
+        double supp$sell = 0.25;
         
         //Misc variables
         int menuChoice, quantity;
@@ -71,12 +71,15 @@ public class Subway_Simulator {
         int customers = 0;
         int serveLimit = 0;
         int serveAmount = 0;
+        String name = "placeholder";
+        boolean cheats = false;
         
         //Extra variables
         boolean biggerStorage = false;
         boolean orderTerminal = false;
         int supplierAmount = 0;
         boolean deliveryDeal = false;
+        boolean pricesDecreased = false;
         boolean neonSign = false;
         double moneyEarnedToday = 0.00;
         int correctToday = 0;
@@ -109,7 +112,13 @@ public class Subway_Simulator {
             + "==============================\n"
             + "Your manager is sick and will need 2 weeks to recover, he made you the substitute manager while he is gone, maybe if you do good enough, you'll get a promotion! \n"
             + "==============================\n"
+            + "Please enter your name.\n"
             + "\n");
+        name = scan1.nextLine();
+        if (name == "88224646ba") {
+            System.out.println("Code entered, activating cheats!");
+            cheats = true;
+        }
         do{
             
             //Start
@@ -132,8 +141,11 @@ public class Subway_Simulator {
                 + "(1) Order more resources\n"
                 + "(2) Buy upgrades\n"
                 + "(3) Check game stats\n"
-                + "(4) Exit the game\n"
-                + "==============================\n");
+                + "(4) Exit the game\n");
+            if (cheats) {
+                System.out.println("(5) [[Cheat Menu]]");
+            }
+            System.out.println("==============================\n");
             
             menuChoice = scan1.nextInt();
             
@@ -160,8 +172,100 @@ public class Subway_Simulator {
                             supplyRoll = rand.nextInt(6) + 1;
                             if (supplyRoll == 1) {
                                 bread = bread + 25;
-                                if (!biggerStorage) {
-                                    
+                                if (!biggerStorage && bread > 150) {
+                                    bread = bread - 25;
+                                    whileSupply = false;
+                                    }
+                                }
+                                else if (biggerStorage && bread > 300) {
+                                    bread = bread - 25;
+                                    whileSupply = false;
+                                }
+                                else {
+                                    whileSupply = true;
+                                }
+                            if (supplyRoll == 2) {
+                                meat = meat + 25;
+                                if (!biggerStorage && meat > 150) {
+                                    meat = meat - 25;
+                                    whileSupply = false;
+                                    }
+                                }
+                                else if (biggerStorage && meat > 300) {
+                                    meat = meat - 25;
+                                    whileSupply = false;
+                                }
+                                else {
+                                    whileSupply = true;
+                                }
+                            if (supplyRoll == 3) {
+                                cheese = cheese + 25;
+                                if (!biggerStorage && cheese > 150) {
+                                    cheese = cheese - 25;
+                                    whileSupply = false;
+                                    }
+                                }
+                                else if (biggerStorage && cheese > 300) {
+                                    cheese = cheese - 25;
+                                    whileSupply = false;
+                                }
+                                else {
+                                    whileSupply = true;
+                                }
+                            if (supplyRoll == 4) {
+                                veg = veg + 25;
+                                if (!biggerStorage && veg > 150) {
+                                    veg = veg - 25;
+                                    whileSupply = false;
+                                    }
+                                }
+                                else if (biggerStorage && veg > 300) {
+                                    veg = veg - 25;
+                                    whileSupply = false;
+                                }
+                                else {
+                                    whileSupply = true;
+                                }
+                            if (supplyRoll == 5) {
+                                sauce = sauce + 25;
+                                if (!biggerStorage && sauce > 150) {
+                                    sauce = sauce - 25;
+                                    whileSupply = false;
+                                    }
+                                }
+                                else if (biggerStorage && sauce > 300) {
+                                    sauce = sauce - 25;
+                                    whileSupply = false;
+                                }
+                                else {
+                                    whileSupply = true;
+                                }
+                            if (supplyRoll == 6) {
+                                drink = drink + 25;
+                                if (!biggerStorage && drink > 150) {
+                                    drink = drink - 25;
+                                    whileSupply = false;
+                                    }
+                                }
+                                else if (biggerStorage && drink > 300) {
+                                    drink = drink - 25;
+                                    whileSupply = false;
+                                }
+                                else {
+                                    whileSupply = true;
+                                }
+                            if (supplyRoll == 7) {
+                                supp = supp + 25;
+                                if (!biggerStorage && supp > 150) {
+                                    supp = supp - 25;
+                                    whileSupply = false;
+                                }
+                                else if (biggerStorage && supp > 300) {
+                                    supp = supp - 25;
+                                    whileSupply = false;
+                                }
+                                else {
+                                    whileSupply = true;
                                 }
                             }
                         }
@@ -434,9 +538,9 @@ public class Subway_Simulator {
                     if (loyalSub > 0) {
                         unloyalCalc = rand.nextInt(100);
                     }
-                    if (loyalCalc <= 20) {
-                        loyalLostToday = 1;
-                        loyalLost = 1;
+                    if (unloyalCalc <= 20) {
+                        loyalLostToday = loyalLostToday + 1;
+                        loyalLost = loyalLost + 1;
                         loyalSub = loyalSub - 1;
                     }
                     currentLoyal = currentLoyal - loyalLostToday; 
@@ -449,6 +553,7 @@ public class Subway_Simulator {
                         currentLoyal = currentLoyal + 1;
                     }
                 }
+                            
                 
                     moneyEarnedToday = moneyEarnedToday * 100;
                     moneyEarnedToday = Math.round(moneyEarnedToday);
@@ -483,7 +588,6 @@ public class Subway_Simulator {
                             + "(Everything is bought in packages of 25)");
                         if (deliveryDeal){
                             System.out.println("All prices 25% off because of Delivery Deal!");
-                            boolean pricesDecreased = false;
                             if (!pricesDecreased) {
                                 bread$cost = (bread$cost / 4) * 3;
                                 meat$cost = (meat$cost / 4) * 3;
@@ -498,13 +602,13 @@ public class Subway_Simulator {
                         System.out.println("==============================\n"
                             + "What would you like to buy?\n"
                             + "(0) Leave the shop\n"
-                            + "(1) Bread: $" + bread$cost + "\n"
-                            + "(2) Meat: $" + meat$cost + "\n"
-                            + "(3) Cheese: $" + cheese$cost + "\n"
-                            + "(4) Vegetables: $" + veg$cost + "\n"
-                            + "(5) Sauce: $" + sauce$cost + "\n"
-                            + "(6) Drinks: $" + drink$cost + "\n"
-                            + "(7)Supplies: $" + supp$cost + "\n"
+                            + "(1) Bread: $" + bread$cost + " (" + bread + ")\n"
+                            + "(2) Meat: $" + meat$cost + " (" + meat + ")\n"
+                            + "(3) Cheese: $" + cheese$cost + " (" + cheese +")\n"
+                            + "(4) Vegetables: $" + veg$cost + " (" + veg + ")\n"
+                            + "(5) Sauce: $" + sauce$cost + " (" + sauce + ")\n"
+                            + "(6) Drinks: $" + drink$cost + " (" + drink + ")\n"
+                            + "(7)Supplies: $" + supp$cost + " (" + supp + ")\n"
                             + "==============================\n");
                         storeChoice = scan1.nextInt();
                         switch (storeChoice){ //time for very messy code
@@ -550,6 +654,14 @@ public class Subway_Simulator {
                                 totalSpent = totalSpent - (quantity * bread$cost);
                                 totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
+                                
+                                money = money * 100;
+                                money = Math.round(money);
+                                money = money / 100;
+                                    
+                                totalSpent = totalSpent * 100;
+                                totalSpent = Math.round(totalSpent);
+                                totalSpent = totalSpent / 100;
                                 break;
                                 
                             case 2: //meat
@@ -588,6 +700,14 @@ public class Subway_Simulator {
                                 totalSpent = totalSpent - (quantity * meat$cost);
                                 totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
+                                
+                                money = money * 100;
+                                money = Math.round(money);
+                                money = money / 100;
+                                    
+                                totalSpent = totalSpent * 100;
+                                totalSpent = Math.round(totalSpent);
+                                totalSpent = totalSpent / 100;
                                 break;
                             
                             case 3: //cheese
@@ -626,6 +746,14 @@ public class Subway_Simulator {
                                 totalSpent = totalSpent - (quantity * cheese$cost);
                                 totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
+                                
+                                money = money * 100;
+                                money = Math.round(money);
+                                money = money / 100;
+                                    
+                                totalSpent = totalSpent * 100;
+                                totalSpent = Math.round(totalSpent);
+                                totalSpent = totalSpent / 100;
                                 break;
                                 
                             case 4: //vegetables
@@ -664,6 +792,14 @@ public class Subway_Simulator {
                                 totalSpent = totalSpent - (quantity * veg$cost);
                                 totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
+                                
+                                money = money * 100;
+                                money = Math.round(money);
+                                money = money / 100;
+                                    
+                                totalSpent = totalSpent * 100;
+                                totalSpent = Math.round(totalSpent);
+                                totalSpent = totalSpent / 100;
                                 break;
                                 
                             case 5: //sauce
@@ -702,6 +838,14 @@ public class Subway_Simulator {
                                 totalSpent = totalSpent - (quantity * sauce$cost);
                                 totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
+                                
+                                money = money * 100;
+                                money = Math.round(money);
+                                money = money / 100;
+                                    
+                                totalSpent = totalSpent * 100;
+                                totalSpent = Math.round(totalSpent);
+                                totalSpent = totalSpent / 100;
                                 break;
                                 
                             case 6: //drinks
@@ -740,6 +884,14 @@ public class Subway_Simulator {
                                 totalSpent = totalSpent - (quantity * drink$cost);
                                 totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
+                                
+                                money = money * 100;
+                                money = Math.round(money);
+                                money = money / 100;
+                                    
+                                totalSpent = totalSpent * 100;
+                                totalSpent = Math.round(totalSpent);
+                                totalSpent = totalSpent / 100;
                                 break;
                                 
                             case 7: //supplies
@@ -778,6 +930,14 @@ public class Subway_Simulator {
                                 totalSpent = totalSpent - (quantity * supp$cost);
                                 totalResourcesBought = totalResourcesBought - (quantity * 25);
                                 }
+                                
+                                money = money * 100;
+                                money = Math.round(money);
+                                money = money / 100;
+                                    
+                                totalSpent = totalSpent * 100;
+                                totalSpent = Math.round(totalSpent);
+                                totalSpent = totalSpent / 100;
                                 break;
                                 
                         }
@@ -844,8 +1004,16 @@ public class Subway_Simulator {
                                 buyUpgrade = scan1.nextInt();
                                 if (buyUpgrade == 1) {
                                     money = money - 200.00;
-                                    totalSpent = totalSpent = 200.00;
+                                    totalSpent = totalSpent + 200.00;
                                     biggerStorage = true;
+                                    
+                                    money = money * 100;
+                                    money = Math.round(money);
+                                    money = money / 100;
+                                    
+                                    totalSpent = totalSpent * 100;
+                                    totalSpent = Math.round(totalSpent);
+                                    totalSpent = totalSpent / 100;
                                 }
                             }
                             else {
@@ -863,8 +1031,16 @@ public class Subway_Simulator {
                                 buyUpgrade = scan1.nextInt();
                                 if (buyUpgrade == 1) {
                                     money = money - 150.00;
-                                    totalSpent = totalSpent = 150.00;
+                                    totalSpent = totalSpent + 150.00;
                                     orderTerminal = true;
+                                    
+                                    money = money * 100;
+                                    money = Math.round(money);
+                                    money = money / 100;
+                                    
+                                    totalSpent = totalSpent * 100;
+                                    totalSpent = Math.round(totalSpent);
+                                    totalSpent = totalSpent / 100;
                                 }
                             }
                             else {
@@ -882,8 +1058,16 @@ public class Subway_Simulator {
                                 buyUpgrade = scan1.nextInt();
                                 if (buyUpgrade == 1) {
                                     money = money - 100.00;
-                                    totalSpent = totalSpent = 100.00;
+                                    totalSpent = totalSpent + 100.00;
                                     supplierAmount = 2;
+                                    
+                                    money = money * 100;
+                                    money = Math.round(money);
+                                    money = money / 100;
+                                    
+                                    totalSpent = totalSpent * 100;
+                                    totalSpent = Math.round(totalSpent);
+                                    totalSpent = totalSpent / 100;
                                 }
                             }
                             else if (supplierAmount == 0) {
@@ -894,13 +1078,29 @@ public class Subway_Simulator {
                                 buyUpgrade = scan1.nextInt();
                                 if (buyUpgrade == 1) {
                                     money = money - 100.00;
-                                    totalSpent = totalSpent = 100.00;
+                                    totalSpent = totalSpent + 100.00;
                                     supplierAmount = 1;
+                                    
+                                    money = money * 100;
+                                    money = Math.round(money);
+                                    money = money / 100;
+                                    
+                                    totalSpent = totalSpent * 100;
+                                    totalSpent = Math.round(totalSpent);
+                                    totalSpent = totalSpent / 100;
                                 }
                                 else if (buyUpgrade == 2) {
                                     money = money - 200.00;
-                                    totalSpent = totalSpent = 200.00;
+                                    totalSpent = totalSpent + 200.00;
                                     supplierAmount = 2;
+                                    
+                                    money = money * 100;
+                                    money = Math.round(money);
+                                    money = money / 100;
+                                    
+                                    totalSpent = totalSpent * 100;
+                                    totalSpent = Math.round(totalSpent);
+                                    totalSpent = totalSpent / 100;
                                 }
                             }
                             else {
@@ -919,6 +1119,14 @@ public class Subway_Simulator {
                                     money = money - 200.00;
                                     totalSpent = totalSpent = 200.00;
                                     deliveryDeal = true;
+                                    
+                                    money = money * 100;
+                                    money = Math.round(money);
+                                    money = money / 100;
+                                    
+                                    totalSpent = totalSpent * 100;
+                                    totalSpent = Math.round(totalSpent);
+                                    totalSpent = totalSpent / 100;
                                 }
                             }
                             else {
@@ -938,6 +1146,14 @@ public class Subway_Simulator {
                                     money = money - 100.00;
                                     totalSpent = totalSpent = 100.00;
                                     neonSign = true;
+                                    
+                                    money = money * 100;
+                                    money = Math.round(money);
+                                    money = money / 100;
+                                    
+                                    totalSpent = totalSpent * 100;
+                                    totalSpent = Math.round(totalSpent);
+                                    totalSpent = totalSpent / 100;
                                 }
                             }
                             else {
@@ -970,7 +1186,11 @@ public class Subway_Simulator {
                     System.out.println("Thank you for playing, goodbye!");
                     playAgain = false;
                     break;
-                
+                case 5:
+                    if (cheats) {
+                        System.out.println("test");
+                    }
+                    break;
                     }
                 
             
@@ -1004,8 +1224,6 @@ public class Subway_Simulator {
             }
         }
         while (playAgain);
-        
-        
         
     }
     
