@@ -22,13 +22,13 @@ public class Subway_Simulator {
         Resources
         Each resource starts with a random amount between 0 and 75
         */
-        int bread = rand.nextInt(75);
-        int meat = rand.nextInt(75);
-        int cheese = rand.nextInt(75);
-        int veg = rand.nextInt(75);
-        int sauce = rand.nextInt(75);
-        int drink = rand.nextInt(75);
-        int supp = rand.nextInt(75);
+        int bread = rand.nextInt(76);
+        int meat = rand.nextInt(76);
+        int cheese = rand.nextInt(76);
+        int veg = rand.nextInt(76);
+        int sauce = rand.nextInt(76);
+        int drink = rand.nextInt(76);
+        int supp = rand.nextInt(76);
         
         //Day variables
         int day = 1;
@@ -38,7 +38,7 @@ public class Subway_Simulator {
         Currency
         starts at random number between $400 and $1000
         */
-        double money = 400.00 + rand.nextInt(600);
+        double money = 400.00 + rand.nextInt(601);
         
         /*
         Resource prices
@@ -169,7 +169,7 @@ public class Subway_Simulator {
                         for (int supplierPhase = 0; supplierPhase != supplierAmount; supplierPhase++) {
                             boolean whileSupply = false;
                             while (!whileSupply) {
-                            supplyRoll = rand.nextInt(6) + 1;
+                            supplyRoll = rand.nextInt(7) + 1;
                             if (supplyRoll == 1) {
                                 bread = bread + 25;
                                 if (!biggerStorage && bread > 150) {
@@ -277,15 +277,15 @@ public class Subway_Simulator {
                         totalCustomers = totalCustomers + customers;
                     }
                     else {
-                        customers = 5 + rand.nextInt(20);
+                        customers = 5 + rand.nextInt(21);
                         totalCustomers = totalCustomers + customers;
                     }
                     customers = customers + currentLoyal;
                     if (orderTerminal) {
-                        serveLimit = 20 + rand.nextInt(50);
+                        serveLimit = 20 + rand.nextInt(51);
                     }
                     else {
-                        serveLimit = 10 + rand.nextInt(25);
+                        serveLimit = 10 + rand.nextInt(26);
                     }
                     if (serveLimit >= customers) {
                         serveAmount = customers;
@@ -340,7 +340,7 @@ public class Subway_Simulator {
                             
                         }
                         
-                        meatUsed = rand.nextInt(2); //meat
+                        meatUsed = rand.nextInt(3); //meat
                         if (meat < meatUsed){
                             if (meat == 1) {
                                 meatUsed = 1;
@@ -373,7 +373,7 @@ public class Subway_Simulator {
                             totalEarned = totalEarned + (meatUsed * meat$sell);
                         }
                         
-                        cheeseUsed = rand.nextInt(1); //cheese
+                        cheeseUsed = rand.nextInt(2); //cheese
                         if (cheese < cheeseUsed){
                                 if (!customerIncorrectAlready) {
                                     incorrectToday = incorrectToday + 1;
@@ -390,7 +390,7 @@ public class Subway_Simulator {
                             totalEarned = totalEarned + (cheeseUsed * cheese$sell);
                         }
                         
-                        vegUsed = rand.nextInt(2); //vegetables
+                        vegUsed = rand.nextInt(3); //vegetables
                         if (veg < vegUsed){
                             if (veg == 1) {
                                 vegUsed = 1;
@@ -423,7 +423,7 @@ public class Subway_Simulator {
                             totalEarned = totalEarned + (vegUsed * veg$sell);
                         }
                         
-                        sauceUsed = rand.nextInt(2); //sauce
+                        sauceUsed = rand.nextInt(3); //sauce
                         if (sauce < sauceUsed){
                             if (sauce == 1) {
                                 sauceUsed = 1;
@@ -456,7 +456,7 @@ public class Subway_Simulator {
                             totalEarned = totalEarned + (sauceUsed * sauce$sell);
                         }
                         
-                        drinkUsed = rand.nextInt(1); //drink
+                        drinkUsed = rand.nextInt(2); //drink
                         if (drink < drinkUsed){
                             if (drink == 1) {
                                 drinkUsed = 1;
@@ -536,7 +536,7 @@ public class Subway_Simulator {
                 for (int unloyalPhase = 0; unloyalPhase != (incorrectToday + leftToday); unloyalPhase++) {
                     loyalSub = currentLoyal;
                     if (loyalSub > 0) {
-                        unloyalCalc = rand.nextInt(100);
+                        unloyalCalc = rand.nextInt(101);
                     }
                     if (unloyalCalc <= 20) {
                         loyalLostToday = loyalLostToday + 1;
@@ -546,7 +546,7 @@ public class Subway_Simulator {
                     currentLoyal = currentLoyal - loyalLostToday; 
                 }
                 for (int loyalPhase = 0; loyalPhase != correctToday; loyalPhase++) {
-                    loyalCalc = rand.nextInt(100);
+                    loyalCalc = rand.nextInt(101);
                     if (loyalCalc <= 5) {
                         loyalGainedToday = loyalGainedToday + 1;
                         loyalReceived = loyalReceived + 1;
