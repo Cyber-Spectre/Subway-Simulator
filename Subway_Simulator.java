@@ -539,18 +539,18 @@ public class Subway_Simulator {
                         unloyalCalc = rand.nextInt(101);
                     }
                     if (unloyalCalc <= 20) {
-                        loyalLostToday = loyalLostToday + 1;
-                        loyalLost = loyalLost + 1;
-                        loyalSub = loyalSub - 1;
+                        loyalLostToday++;
+                        loyalLost++;
+                        loyalSub--;
                     }
                     currentLoyal = currentLoyal - loyalLostToday; 
                 }
                 for (int loyalPhase = 0; loyalPhase != correctToday; loyalPhase++) {
                     loyalCalc = rand.nextInt(101);
                     if (loyalCalc <= 5) {
-                        loyalGainedToday = loyalGainedToday + 1;
-                        loyalReceived = loyalReceived + 1;
-                        currentLoyal = currentLoyal + 1;
+                        loyalGainedToday++;
+                        loyalReceived++;
+                        currentLoyal++;
                     }
                 }
                             
@@ -576,7 +576,7 @@ public class Subway_Simulator {
                                     + "---- " + loyalGainedToday + " were gained;\n"
                                     + "---- " + loyalLostToday + " were lost");
                             
-                            day = day + 1;
+                            day++;
                     break; 
                
                 case 1: //Order Resources
