@@ -71,7 +71,7 @@ public class Subway_Simulator {
         int customers = 0;
         int serveLimit = 0;
         int serveAmount = 0;
-        String name = "placeholder";
+        String name;
         boolean cheats = false;
         
         //Extra variables
@@ -115,9 +115,10 @@ public class Subway_Simulator {
             + "Please enter your name.\n"
             + "\n");
         name = scan1.nextLine();
-        if (name == "88224646ba") {
+        if (name.equals ("88224646ba")) {
             System.out.println("Code entered, activating cheats!");
             cheats = true;
+            name = "HackerMan";
         }
         do{
             
@@ -141,9 +142,9 @@ public class Subway_Simulator {
                 + "(1) Order more resources\n"
                 + "(2) Buy upgrades\n"
                 + "(3) Check game stats\n"
-                + "(4) Exit the game\n");
+                + "(4) Exit the game");
             if (cheats) {
-                System.out.println("(5) [[Cheat Menu]]");
+                System.out.println("(5) [Cheat Menu]");
             }
             System.out.println("==============================\n");
             
@@ -1188,7 +1189,101 @@ public class Subway_Simulator {
                     break;
                 case 5:
                     if (cheats) {
-                        System.out.println("test");
+                        boolean stillCheats = true;
+                        while (stillCheats) {
+                        System.out.println("Welcome to the cheat menu!\n"
+                                + "==============================\n"
+                                + "(1) Set money\n"
+                                + "(2) Infinite Resources\n"
+                                + "(3) Unlock Upgrades\n"
+                                + "(4) Set days\n"
+                                + "(5) Disable Cheats\n"
+                                + "(0) Exit cheat menu");
+                        
+                        int cheatChoice = scan1.nextInt();
+                        
+                        switch (cheatChoice) {
+                            case 0:
+                                stillCheats = false;
+                                break;
+                                
+                            case 1:
+                                System.out.println("How much money would you like to set? (ex: 14786.57)");
+                                double moneyChoice = scan1.nextDouble();
+                                money = moneyChoice;
+                                break;
+                                
+                            case 2:
+                                System.out.println("You now have (almost) infinite resources!\n"
+                                        + "(Warning, this will break suppliers, don't buy suppliers if you have this)");
+                                bread = 999999999;
+                                meat = 999999999;
+                                cheese = 999999999;
+                                veg = 999999999;
+                                sauce = 999999999;
+                                drink = 999999999;
+                                supp = 999999999;
+                                break;
+                                
+                            case 3:
+                                boolean cheatUpgrade = true;
+                                while (cheatUpgrade) {
+                                    System.out.println("What upgrades would you like to unlock?\n"
+                                            + "(1) Bigger Storage\n"
+                                            + "(2) Ordering Terminal\n"
+                                            + "(3) Supplier\n"
+                                            + "(4) Delivery Deal\n"
+                                            + "(5) Neon Sign\n"
+                                            + "(0) Exit Shop");
+                                    
+                                    int cheatUpgradeChoice = scan1.nextInt();
+                                    
+                                    switch (cheatUpgradeChoice) {
+                                        
+                                        case 0:
+                                            cheatUpgrade = false;
+                                            break;
+                                        case 1:
+                                            System.out.println("Unlocked");
+                                            biggerStorage = true;
+                                            break;
+                                        case 2:
+                                            System.out.println("Unlocked");
+                                            orderTerminal = true;
+                                            break;
+                                        case 3:
+                                            System.out.println("Unlocked");
+                                            supplierAmount = 2;
+                                            break;
+                                        case 4:
+                                            System.out.println("Unlocked");
+                                            deliveryDeal = true;
+                                            break;
+                                        case 5:
+                                            System.out.println("Unlocked");
+                                            neonSign = true;
+                                            break;
+                                            
+                                        
+                                    }
+                                }
+                                break;
+                                
+                            case 4:
+                                System.out.println("Set the amount of days the game runs for:");
+                                int dayChoice = scan1.nextInt();
+                                
+                                totalDays = dayChoice;
+                                break;
+                                
+                            case 5:
+                                System.out.println("Cheats are now disabled, you must restart if you want them enabled again");
+                                cheats = false;
+                                stillCheats = false;
+                                break;
+                             
+                        }
+                        }
                     }
                     break;
                     }
@@ -1197,7 +1292,7 @@ public class Subway_Simulator {
             if (daysLeft == 0) {
                 System.out.println("The manager has returned, you won!\n"
                     + "You ended the game with $" + money);
-                if (money == 1000.00) {
+                if (money >= 1000.00) {
                     System.out.println("You did a great job, you got promoted!");
                     playAgain = false;
                 }
