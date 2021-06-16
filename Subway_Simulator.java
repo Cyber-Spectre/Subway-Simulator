@@ -91,7 +91,6 @@ public class Subway_Simulator {
         int unloyalCalc;
         int loyalGainedToday = 0;
         int loyalLostToday = 0;
-        int loyalSub = 0;
         
         //Stat variables
         double totalSpent = 0.00;
@@ -534,24 +533,23 @@ public class Subway_Simulator {
                         totalServedCorrect = totalServedCorrect + 1;
                     }
                 }
-                for (int unloyalPhase = 0; unloyalPhase != (incorrectToday + leftToday); unloyalPhase++) {
-                    loyalSub = currentLoyal;
-                    if (loyalSub > 0) {
-                        unloyalCalc = rand.nextInt(101);
-                    }
-                    if (unloyalCalc <= 20) {
-                        loyalLostToday++;
-                        loyalLost++;
-                        loyalSub--;
-                    }
-                    currentLoyal = currentLoyal - loyalLostToday; 
-                }
                 for (int loyalPhase = 0; loyalPhase != correctToday; loyalPhase++) {
                     loyalCalc = rand.nextInt(101);
                     if (loyalCalc <= 5) {
                         loyalGainedToday++;
                         loyalReceived++;
                         currentLoyal++;
+                    }
+                }
+                for (int unloyalPhase = 0; unloyalPhase != (incorrectToday + leftToday); unloyalPhase++) {
+                    if (currentLoyal > 0) {
+                        unloyalCalc = rand.nextInt(101);
+                    
+                        if (unloyalCalc <= 20) {
+                            loyalLostToday++;
+                            loyalLost++;
+                            currentLoyal--;
+                    }
                     }
                 }
                             
@@ -1004,17 +1002,22 @@ public class Subway_Simulator {
                                     + "(2) No");
                                 buyUpgrade = scan1.nextInt();
                                 if (buyUpgrade == 1) {
-                                    money = money - 200.00;
-                                    totalSpent = totalSpent + 200.00;
-                                    biggerStorage = true;
+                                    if (money >= 200) {
+                                        money = money - 200.00;
+                                        totalSpent = totalSpent + 200.00;
+                                        biggerStorage = true;
                                     
-                                    money = money * 100;
-                                    money = Math.round(money);
-                                    money = money / 100;
-                                    
-                                    totalSpent = totalSpent * 100;
-                                    totalSpent = Math.round(totalSpent);
-                                    totalSpent = totalSpent / 100;
+                                        money = money * 100;
+                                        money = Math.round(money);
+                                        money = money / 100;
+                                        
+                                        totalSpent = totalSpent * 100;
+                                        totalSpent = Math.round(totalSpent);
+                                        totalSpent = totalSpent / 100;
+                                    }
+                                    else {
+                                        System.out.println("Not enough money for that.");
+                                    }
                                 }
                             }
                             else {
@@ -1031,17 +1034,22 @@ public class Subway_Simulator {
                                     + "(2) No");
                                 buyUpgrade = scan1.nextInt();
                                 if (buyUpgrade == 1) {
-                                    money = money - 150.00;
-                                    totalSpent = totalSpent + 150.00;
-                                    orderTerminal = true;
+                                    if (money >= 150) {
+                                        money = money - 150.00;
+                                        totalSpent = totalSpent + 150.00;
+                                        orderTerminal = true;
                                     
-                                    money = money * 100;
-                                    money = Math.round(money);
-                                    money = money / 100;
+                                        money = money * 100;
+                                        money = Math.round(money);
+                                        money = money / 100;
                                     
-                                    totalSpent = totalSpent * 100;
-                                    totalSpent = Math.round(totalSpent);
-                                    totalSpent = totalSpent / 100;
+                                        totalSpent = totalSpent * 100;
+                                        totalSpent = Math.round(totalSpent);
+                                        totalSpent = totalSpent / 100;
+                                    }
+                                    else {
+                                        System.out.println("Not enough money for that.");
+                                    }
                                 }
                             }
                             else {
@@ -1058,17 +1066,22 @@ public class Subway_Simulator {
                                         + "(2) No");
                                 buyUpgrade = scan1.nextInt();
                                 if (buyUpgrade == 1) {
-                                    money = money - 100.00;
-                                    totalSpent = totalSpent + 100.00;
-                                    supplierAmount = 2;
+                                    if (money >= 100) {
+                                        money = money - 100.00;
+                                        totalSpent = totalSpent + 100.00;
+                                        supplierAmount = 2;
                                     
-                                    money = money * 100;
-                                    money = Math.round(money);
-                                    money = money / 100;
+                                        money = money * 100;
+                                        money = Math.round(money);
+                                        money = money / 100;
                                     
-                                    totalSpent = totalSpent * 100;
-                                    totalSpent = Math.round(totalSpent);
-                                    totalSpent = totalSpent / 100;
+                                        totalSpent = totalSpent * 100;
+                                        totalSpent = Math.round(totalSpent);
+                                        totalSpent = totalSpent / 100;
+                                    }
+                                    else {
+                                        System.out.println("Not enough money for that.");
+                                    }
                                 }
                             }
                             else if (supplierAmount == 0) {
@@ -1078,30 +1091,40 @@ public class Subway_Simulator {
                                     + "(2) 2");
                                 buyUpgrade = scan1.nextInt();
                                 if (buyUpgrade == 1) {
-                                    money = money - 100.00;
-                                    totalSpent = totalSpent + 100.00;
-                                    supplierAmount = 1;
+                                    if (money >= 100) {
+                                        money = money - 100.00;
+                                        totalSpent = totalSpent + 100.00;
+                                        supplierAmount = 1;
                                     
-                                    money = money * 100;
-                                    money = Math.round(money);
-                                    money = money / 100;
+                                        money = money * 100;
+                                        money = Math.round(money);
+                                        money = money / 100;
                                     
-                                    totalSpent = totalSpent * 100;
-                                    totalSpent = Math.round(totalSpent);
-                                    totalSpent = totalSpent / 100;
+                                        totalSpent = totalSpent * 100;
+                                        totalSpent = Math.round(totalSpent);
+                                        totalSpent = totalSpent / 100;
+                                    }
+                                    else {
+                                        System.out.println("Not enough money for that.");
+                                    }
                                 }
                                 else if (buyUpgrade == 2) {
-                                    money = money - 200.00;
-                                    totalSpent = totalSpent + 200.00;
-                                    supplierAmount = 2;
+                                    if (money >= 200) {
+                                        money = money - 200.00;
+                                        totalSpent = totalSpent + 200.00;
+                                        supplierAmount = 2;
                                     
-                                    money = money * 100;
-                                    money = Math.round(money);
-                                    money = money / 100;
+                                        money = money * 100;
+                                        money = Math.round(money);
+                                        money = money / 100;
                                     
-                                    totalSpent = totalSpent * 100;
-                                    totalSpent = Math.round(totalSpent);
-                                    totalSpent = totalSpent / 100;
+                                        totalSpent = totalSpent * 100;
+                                        totalSpent = Math.round(totalSpent);
+                                        totalSpent = totalSpent / 100;
+                                    }
+                                    else {
+                                        System.out.println("Not enough money for that.");
+                                    }
                                 }
                             }
                             else {
@@ -1117,17 +1140,22 @@ public class Subway_Simulator {
                                     + "(2) No");
                                 buyUpgrade = scan1.nextInt();
                                 if (buyUpgrade == 1) {
-                                    money = money - 200.00;
-                                    totalSpent = totalSpent = 200.00;
-                                    deliveryDeal = true;
+                                    if (money >= 200) {
+                                        money = money - 200.00;
+                                        totalSpent = totalSpent = 200.00;
+                                        deliveryDeal = true;
                                     
-                                    money = money * 100;
-                                    money = Math.round(money);
-                                    money = money / 100;
+                                        money = money * 100;
+                                        money = Math.round(money);
+                                        money = money / 100;
                                     
-                                    totalSpent = totalSpent * 100;
-                                    totalSpent = Math.round(totalSpent);
-                                    totalSpent = totalSpent / 100;
+                                        totalSpent = totalSpent * 100;
+                                        totalSpent = Math.round(totalSpent);
+                                        totalSpent = totalSpent / 100;
+                                    }
+                                    else {
+                                        System.out.println("Not enough money for that.");
+                                    }
                                 }
                             }
                             else {
@@ -1144,17 +1172,22 @@ public class Subway_Simulator {
                                     + "(2) No");
                                 buyUpgrade = scan1.nextInt();
                                 if (buyUpgrade == 1) {
-                                    money = money - 100.00;
-                                    totalSpent = totalSpent = 100.00;
-                                    neonSign = true;
+                                    if (money >= 100) {
+                                        money = money - 100.00;
+                                        totalSpent = totalSpent = 100.00;
+                                        neonSign = true;
                                     
-                                    money = money * 100;
-                                    money = Math.round(money);
-                                    money = money / 100;
+                                        money = money * 100;
+                                        money = Math.round(money);
+                                        money = money / 100;
                                     
-                                    totalSpent = totalSpent * 100;
-                                    totalSpent = Math.round(totalSpent);
-                                    totalSpent = totalSpent / 100;
+                                        totalSpent = totalSpent * 100;
+                                        totalSpent = Math.round(totalSpent);
+                                        totalSpent = totalSpent / 100;
+                                    }
+                                    else {
+                                        System.out.println("Not enough money for that.");
+                                    }
                                 }
                             }
                             else {
@@ -1169,6 +1202,7 @@ public class Subway_Simulator {
                 case 3: //Game stats
                     System.out.println("Welcome to the stats menu!\n"
                         + "==============================\n"
+                        + "Name: " + name + "\n"
                         + "You have spent: $" + totalSpent + "\n"
                         + "You have earned: $" + totalEarned + "\n"
                         + "You have bought " + totalResourcesBought + " resources\n"
@@ -1192,13 +1226,14 @@ public class Subway_Simulator {
                         boolean stillCheats = true;
                         while (stillCheats) {
                         System.out.println("Welcome to the cheat menu!\n"
-                                + "==============================\n"
-                                + "(1) Set money\n"
-                                + "(2) Infinite Resources\n"
-                                + "(3) Unlock Upgrades\n"
-                                + "(4) Set days\n"
-                                + "(5) Disable Cheats\n"
-                                + "(0) Exit cheat menu");
+                            + "==============================\n"
+                            + "(1) Set money\n"
+                            + "(2) Infinite Resources\n"
+                            + "(3) Unlock Upgrades\n"
+                            + "(4) Set days\n"
+                            + "(5) Change name\n"
+                            + "(6) Disable Cheats\n"
+                            + "(0) Exit cheat menu");
                         
                         int cheatChoice = scan1.nextInt();
                         
@@ -1277,6 +1312,12 @@ public class Subway_Simulator {
                                 break;
                                 
                             case 5:
+                                System.out.println("Your name is currently " + name + "\n"
+                                        + "What would you like to change it to? (retype the name to keep it the same)");
+                                name = scan1.next();
+                                break;
+                                
+                            case 6:
                                 System.out.println("Cheats are now disabled, you must restart if you want them enabled again");
                                 cheats = false;
                                 stillCheats = false;
@@ -1289,7 +1330,7 @@ public class Subway_Simulator {
                     }
                 
             
-            if (daysLeft == 0) {
+            if (day == totalDays) {
                 System.out.println("The manager has returned, you won!\n"
                     + "You ended the game with $" + money);
                 if (money >= 1000.00) {
@@ -1304,6 +1345,7 @@ public class Subway_Simulator {
             if (!playAgain) {
                 System.out.println("==============================\n"
                     + "Final game stats:\n"
+                    + "Name: " + name + "\n"
                     + "You have spent: $" + totalSpent + "\n"
                     + "You have earned: $" + totalEarned + "\n"
                     + "You have bought " + totalResourcesBought + " resources\n"
